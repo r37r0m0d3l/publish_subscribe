@@ -29,13 +29,13 @@ npm install publish_subscribe
 CommonJS
 
 ```js
-const PublishSubscribe = require("publish_subscribe").default;
+const PublishSubscribe = require("@r37r0m0d3l/publish_subscribe").default;
 ```
 
 ECMAScript Modules
 
 ```typescript
-import { PublishSubscribe } from "publish_subscribe/es";
+import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 ```
 
 ```js
