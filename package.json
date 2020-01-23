@@ -1,0 +1,68 @@
+{
+  "author": "Anton Trofimenko",
+  "bugs": {
+    "url": "https://github.com/r37r0m0d3l/publish_subscribe/issues"
+  },
+  "contributors": [
+    {
+      "email": "r37r0m0d3l@protonmail.com",
+      "name": "Anton Trofimenko"
+    }
+  ],
+  "dependencies": {
+    "lodash.clonedeep": "4.5.0"
+  },
+  "description": "Message bus implementation via publish / subscribe pattern",
+  "devDependencies": {
+    "@babel/core": "7.8.3",
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/preset-env": "7.8.3",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "10.0.3",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.9.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "jest": "25.1.0",
+    "prettier": "1.19.1"
+  },
+  "exports": {
+    ".": "./dist/publish_subscribe.cjs",
+    "./default": "./dist/publish_subscribe.cjs",
+    "./es": "./dist/publish_subscribe.mjs"
+  },
+  "files": [
+    "dist/publish_subscribe.cjs",
+    "dist/publish_subscribe.d.ts",
+    "dist/publish_subscribe.mjs"
+  ],
+  "homepage": "https://github.com/r37r0m0d3l/publish_subscribe#readme",
+  "keywords": [
+    "emitter",
+    "event",
+    "eventemitter",
+    "messaging",
+    "messaging-pattern",
+    "pattern",
+    "pub/sub",
+    "publish",
+    "publish-subscribe-pattern",
+    "publish/subscribe",
+    "publish–subscribe",
+    "pubsub",
+    "subscribe"
+  ],
+  "license": "MIT",
+  "main": "./dist/publish_subscribe.cjs",
+  "name": "publish_subscribe",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r37r0m0d3l/publish_subscribe.git"
+  },
+  "scripts": {
+    "lint": "npx eslint ./src/publish_subscribe.mjs",
+    "test": "jest"
+  },
+  "type": "module",
+  "types": "./dist/publish_subscribe.d.ts",
+  "version": "1.0.0"
+}
