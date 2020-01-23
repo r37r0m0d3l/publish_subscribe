@@ -2,13 +2,13 @@
 
 JavaScript implementation of the Publish/Subscribe pattern.
 
-[![NPM Version](https://img.shields.io/npm/v/publish_subscribe.svg?style=flat)]()
-[![NPM Downloads](https://img.shields.io/npm/dt/publish_subscribe.svg?style=flat)]()
+[![NPM Version](https://img.shields.io/npm/v/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
+[![NPM Downloads](https://img.shields.io/npm/dt/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
 [![Build Status](https://travis-ci.org/r37r0m0d3l/publish_subscribe.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/publish_subscribe)
 [![Issues](https://img.shields.io/github/issues-raw/r37r0m0d3l/publish_subscribe.svg?maxAge=25000)](https://github.com/r37r0m0d3l/publish_subscribe/issues)
 [![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/publish_subscribe/badge.svg?targetFile=package.json)](https://snyk.io/test/github/r37r0m0d3l/publish_subscribe?targetFile=package.json)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/272b5247f8b777c75360/maintainability)](https://codeclimate.com/github/r37r0m0d3l/publish_subscribe/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6b1544ba3a56a4df3e43/maintainability)](https://codeclimate.com/github/r37r0m0d3l/publish_subscribe/maintainability)
 [![Dependency Status](https://david-dm.org/r37r0m0d3l/publish_subscribe.svg)](https://david-dm.org/r37r0m0d3l/publish_subscribe)
 [![devDependencies Status](https://david-dm.org/r37r0m0d3l/publish_subscribe/dev-status.svg)](https://david-dm.org/r37r0m0d3l/publish_subscribe?type=dev)
 
