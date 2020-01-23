@@ -53,7 +53,7 @@
   ],
   "license": "MIT",
   "main": "./dist/publish_subscribe.cjs",
-  "name": "publish_subscribe",
+  "name": "@r37r0m0d3l/publish_subscribe",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/r37r0m0d3l/publish_subscribe.git"
