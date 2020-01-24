@@ -1,3 +1,9 @@
+#### 1.0.4 Jan 24, 2020
+
+- ♻️ Refactor `getChannels` method. Now channels defined as `Symbol` are private. However you can still check it using `hasChannel` method.
+
+- 📚 Update documentation
+
 #### 1.0.3 Jan 23, 2020
 
 - 🔨 Fix `publish_subscribe.d.ts`

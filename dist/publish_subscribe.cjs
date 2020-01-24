@@ -161,7 +161,7 @@ class PublishSubscribe {
   /**
    * @name dropChannel
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @returns {void}
    */
   dropChannel(channel) {
@@ -196,15 +196,17 @@ class PublishSubscribe {
   /**
    * @name getChannels
    * @public
-   * @returns {Array.<number|string|Symbol>}
+   * @returns {Array.<number|string>}
    */
   getChannels() {
-    return Array.from(this.#channels).sort((alpha, beta) => alpha.localeCompare(beta));
+    return Array.from(this.#channels)
+      .filter((channel) => typeof channel !== "symbol")
+      .sort((alpha, beta) => alpha.localeCompare(beta));
   }
   /**
    * @name hasChannel
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @returns {boolean}
    */
   hasChannel(channel) {
@@ -213,7 +215,7 @@ class PublishSubscribe {
   /**
    * @name hasSubscription
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @returns {boolean}
    */
   hasSubscription(channel) {
@@ -246,7 +248,7 @@ class PublishSubscribe {
   /**
    * @name publish
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @param {*=} data
    * @param {boolean=} cloneData
    * @returns {void}
@@ -349,7 +351,7 @@ class PublishSubscribe {
   /**
    * @name publishAsync
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @param {*=} data
    * @param {boolean=} resultOnly
    * @param {boolean=} cloneData
@@ -458,7 +460,7 @@ class PublishSubscribe {
   /**
    * @name publishSync
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @param {*=} data
    * @param {boolean=} resultOnly
    * @param {boolean=} cloneData
@@ -559,7 +561,7 @@ class PublishSubscribe {
   /**
    * @name subscribe
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @param {function=} callback
    * @param {boolean=} once
    * @returns {TypeError|string}
@@ -579,7 +581,7 @@ class PublishSubscribe {
   /**
    * @name subscribeOnce
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @param {function=} callback
    * @returns {TypeError|string}
    * @throws TypeError
@@ -598,7 +600,7 @@ class PublishSubscribe {
   /**
    * @name unsubscribe
    * @public
-   * @param {function|number|string|Symbol} callbackChannelToken
+   * @param {function|number|string|symbol} callbackChannelToken
    * @param {function=} callback
    * @returns {number}
    */
@@ -639,7 +641,7 @@ class PublishSubscribe {
   /**
    * @name unsubscribeByChannelAndCallback
    * @public
-   * @param {number|string|Symbol} channel
+   * @param {number|string|symbol} channel
    * @param {function} callback
    * @returns {number}
    */

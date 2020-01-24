@@ -38,9 +38,9 @@ declare class PublishSubscribe {
   /**
    * @name getChannels
    * @public
-   * @returns {Array.<number|string|symbol>}
+   * @returns {Array.<number|string>}
    */
-  public getChannels(): Array<number | string | symbol>;
+  public getChannels(): Array<number | string>;
   /**
    * @name hasChannel
    * @public
@@ -101,8 +101,8 @@ declare class PublishSubscribe {
     data?: any,
     resultOnly?: boolean,
     cloneData?: boolean,
-    callback?: () => Array<any | { channel: number | string | symbol; data: any; token?: string }>,
-  );
+    callback?: (results: Array<any | { channel: number | string | symbol; data: any; token?: string }>) => any,
+  ): Array<any | { channel: number | string | symbol; data: any; token?: string }>;
   /**
    * @name setLogging
    * @public

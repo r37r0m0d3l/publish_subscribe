@@ -1,6 +1,6 @@
-# Publish / Subscribe
+# Publish-Subscribe
 
-JavaScript implementation of the Publish/Subscribe pattern.
+JavaScript implementation of the Publish-Subscribe pattern.
 
 [![NPM Version](https://img.shields.io/npm/v/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
@@ -18,21 +18,55 @@ JavaScript implementation of the Publish/Subscribe pattern.
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/publish_subscribe.svg?style=social&label=Fork)]()
 [![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
 
-## Usage
+## Tl;dr
 
-Installation
-
-```bash
-npm install publish_subscribe
+```typescript
+import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
+//
+const pubsub: PublishSubscribe = new PublishSubscribe();
+type IChannel = number|string|symbol;
+const CHANNEL: IChannel = "app";
+//
+const calledOnce: boolean = false;
+function syncCallback(data: any, channel: IChannel, token: string): any {
+  return true;
+}
+async function asyncCallback(data: any, channel: IChannel, token: string): any {
+  return true;
+}
+const tokenSync: string = pubsub.subscribe(CHANNEL, syncCallback, calledOnce);
+const tokenAsync: string = pubsub.subscribe(CHANNEL, syncCallback, calledOnce);
+//
+const data: any = { someData: "to publish" };
+const resultOnly: boolean = true;
+const cloneData: boolean = true;
+function callback(
+  results: Array<any | { channel: IChannel; data: any; token?: string }>
+): any {}
+const resultsSync = pubsub
+  .publishSync(CHANNEL, data, resultOnly, cloneData, callback);
+(async () => {
+  const resultsAsync = await pubsub
+    .publishAsync(CHANNEL, data, resultOnly, cloneData);
+})();
+//
 ```
 
-CommonJS
+## Usage
+
+Installation.
+
+```bash
+npm install @r37r0m0d3l/publish_subscribe
+```
+
+CommonJS.
 
 ```js
 const PublishSubscribe = require("@r37r0m0d3l/publish_subscribe").default;
 ```
 
-ECMAScript Modules
+ECMAScript Modules.
 
 ```typescript
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
@@ -42,145 +76,210 @@ import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 const pubsub = new PublishSubscribe();
 ```
 
-Logging
+## Logging
+
+Set log function.
 
 ```js
 pubsub.setLogging((info) => {
   console.group("LOGGING!!!");
   console.log(info);
+  /*
+  Example when subscribing:
+  {
+    channel: "app",
+    callback: [Function: sync],
+    once: false,
+    method: "subscribe"
+  }
+  Example when publishing:
+  {
+    channel: "app",
+    data: { data: "the data" },
+    token: "CETl6gZXkTMhm7JY",
+    method: "publishSync -> send"
+  }
+  */
   console.groupEnd();
 });
 
 pubsub.disableLogging();
 ```
 
-Naming channels
+## Naming Channels
+
+Channels can be finite numbers, strings or symbols.
 
 ```js
 const CHANNEL_NAME_AS_STRING = "TheChannelName";
 const CHANNEL_NAME_AS_NUMBER = 123;
-const CHANNEL_NAME_AS_SYMBOL = Symbol("ThisChannelProbablyPrivateToModule");
-const CHANNEL = "app";
+const CHANNEL_NAME_AS_SYMBOL = Symbol("ThisChannelLookVeryPrivate");
+const CHANNEL = "channel_name";
 ```
 
-Synchronous subscription
+## Subscription
+
+Synchronous subscription.
 
 ```js
-const tokenOfSynchronous = pubsub.subscribe(CHANNEL, function sync(data, channel, token) {
-  return { message: "Here can by any kind data for synchronous functions" };
-});
+const tokenOfSynchronous = pubsub
+  .subscribe("channel_name", function sync(data, channel, token) {
+    return { message: "Here can by any kind data for synchronous functions" };
+  });
 ```
 
-Asynchronous subscription
+Asynchronous subscription.
 
 ```js
-const tokenOfAsynchronous = pubsub.subscribe(CHANNEL, async (data, channel, token) => {
-  return "Here can by any kind data for asynchronous functions";
-});
+const tokenOfAsynchronous = pubsub
+  .subscribe("channel_name", async (data, channel, token) => {
+    // Other async call here
+    return "Here can by any kind data for asynchronous functions";
+  });
 ```
 
-Reusable subscription
+Reusable subscription.
 
 ```js
+/**
+ * @param {*} data
+ * @param {number|string|symbol} channel
+ * @param {string} token
+ */
 function synchronousCallback(data, channel, token) {
-  // And here is no any data returned
+  // And here is no any data returned if you wish
 }
-const tokenOfSynchronousCallback = pubsub.subscribe(CHANNEL, synchronousCallback);
+const tokenOne = pubsub.subscribe("channel_name_1", synchronousCallback);
+const tokenTwo = pubsub.subscribe("channel_name_2", synchronousCallback);
 ```
 
-No need for token as subscription will expire after first successful call
+No need for token as subscription will expire after first successful call.
 
 ```js
-pubsub.subscribeOnce(CHANNEL, synchronousCallback);
+pubsub.subscribeOnce("channel_exit", (data, channel, _token) => {});
 ```
 
-Intercept all publishing
+## Publishing Events
+
+Intercept all publishing.
 
 ```js
 pubsub.onPublish((channel, data) => {
   // All publishing will be intercepted here
-  // and you can do your message matching here
+  // and you can do your "message matching" here
+  switch(channel) {
+    case "app:logout":
+      pubsub.dropAll();
+    break;
+  }
 });
 
 pubsub.onPublish(); // now its disabled
 ```
 
-Get synchronous results from subscribers
+Get synchronous results from subscribers.
 
 ```js
-const results = pubsub.publishSync(CHANNEL, { data: "the data" }, true, true, (results) => {
-  // Only synchronous functions will be called!
-  // Array of results can be intercepted in callback
-});
+// Channel name
+const channel = "app:start";
+// Any kind of data - primitive or object
+const data = { data: "the data" };
+// Default behavior
+const resultOnly = true;
+// Prevent published data changes between subscriptions
+const cloneData = true;
+// Array with results
+const results = pubsub
+  .publishSync(channel, data, resultOnly, cloneData, (results) => {
+    // Only synchronous functions will be called!
+    // Array of results can be intercepted in callback
+    console.log(results);
+  });
 console.log(results); // or can be accessed as function call
 ```
 
-Get synchronous and asynchronous results from subscribers
+Get synchronous and asynchronous results from subscribers.
 
 ```js
-pubsub.publishAsync(CHANNEL, { data: "the data" }, false).then((results) => {
-  // results here also contain additional array of data from subscribers i.e.
-  // [ { channel: "app", result: "data from subscriber", token: "zzroUP97lnxL0VUa" } ]
-});
+pubsub
+  .publishAsync("channel_name", { data: "the data" }, false)
+    .then((results) => {
+      // results here also contains additional array of data from subscribers
+      // [ { channel: "app", result: "data", token: "zzroUP97lnxL0VUa" } ]
+    });
 ```
 
-Do not wait anything from subscribers
+Do not wait anything from subscribers - use `publish`.
 
 ```js
-pubsub.publish(CHANNEL, { data: "the data" });
+pubsub.publish("channel_name", { data: "the data" });
 ```
 
-Retrieve callback via token
+## Unsubscribe
+
+Unsubscribe via token previously retrieved from `subscribe` method.
 
 ```js
-const callback = pubsub.getCallback(tokenOfSynchronousCallback);
+const token = pubsub.subscribe("channel_name", () => {});
+pubsub.unsubscribeByToken(token);
 ```
 
-Unsubscribe
+Unsubscribe by channel and callback.
+
+All subscriptions in `channel` based on `callback` will be removed.
 
 ```js
-// Unsubscribe via token previously retrieved from `subscribe` method
-
-pubsub.unsubscribeByToken(tokenOfSynchronous);
-
-// All subscriptions based on callback will be removed
-
-pubsub.unsubscribeByChannelAndCallback(CHANNEL, synchronousCallback);
-
-// This callback function will be removed from all subscriptions
-
-pubsub.unsubscribeByCallback(synchronousCallback);
-
-// Unsubscribe based on parameters provided
-
-pubsub.unsubscribe(callbackChannelToken, callback);
+// callback == function someFunction(data, channel, token) {}
+pubsub.unsubscribeByChannelAndCallback("channel_name", callback);
 ```
 
-Has any subscriptions
+This `callback` function will be removed from **all** subscriptions.
 
 ```js
-pubsub.hasSubscription(CHANNEL);
+pubsub.unsubscribeByCallback(callback);
 ```
 
-Has channel
+Unsubscribe based on parameters provided.
 
 ```js
-pubsub.hasChannel(CHANNEL);
+pubsub.unsubscribe(callbackOrChannelOrToken);
+pubsub.unsubscribe(channel, callback);
 ```
 
-Get list of channels
+## Utilities
+
+Retrieve callback function via token.
+
+```js
+// token == "zzroUP97lnxL0VUa"
+const callback = pubsub.getCallback(token);
+```
+
+Has any subscriptions.
+
+```js
+pubsub.hasSubscription("channel_name");
+```
+
+Has channel.
+
+```js
+pubsub.hasChannel("channel_name");
+```
+
+Get list of channels. Array of numbers, strings, symbols.
 
 ```js
 pubsub.getChannels();
 ```
 
-Drop channel
+Drop channel.
 
 ```js
-pubsub.dropChannel(CHANNEL);
+pubsub.dropChannel("channel_name");
 ```
 
-Clear instance
+Clear instance.
 
 ```js
 pubsub.dropAll();
@@ -188,50 +287,62 @@ pubsub.dropAll();
 
 ## About
 
-Yet another publish/subscribe library? Why this library exists:
+Yet another publish-subscribe library? Why this library exists:
 
-- Prevent published data changes between subscriptions.
+- ⭐⭐⭐
 
-- Possibility to publish asynchronously.
+    - Preventing published data changes between subscriptions.
 
-- Possibility to do sync publish and receive data from subscriptions.
+    - Possibility to publish events asynchronously.
 
-- Custom logging into console for most actions.
+    - Possibility to do synchronous publishing and receive data from subscriptions.
 
-- Possibility to publish async events.
+    - Possibility to use async callbacks in subscriptions.
 
-- Possibility to use async callbacks in subscriptions.
+    - Get subscription callback function by token and use it somewhere else.
 
-- Get subscription callback function by token and use it somewhere else.
+    - Error swallowing. Publish-subscribe pattern should not broke on some function somewhere deep in code.
 
-- Possibility to use finite numbers, strings or symbols as channel names.
+- ⭐⭐
 
-- Subscription functions receive callback token among channel name and published data.
+    - Possibility to use finite numbers, strings or symbols as channel names.
 
-- Has _subscribeOnce_ method.
+    - Subscription functions receive callback token among channel name and published data.
 
-- Has _onPublish_ method for _global message matching_.
+    - Has _subscribeOnce_ method.
 
-- Error swallowing. Publish/subscribe pattern should not broke on some function somewhere deep in code.
+    - Has _onPublish_ method for _global message matching_.
 
-- Almost dependency free. This library will work even if the last commit was ten years ago.
+- ⭐
 
-- TypeScript definitions.
+    - Custom logging into console for most actions.
 
-The **worst** things that can happen to pub/sub library that is **not** here:
+    - TypeScript definitions.
 
-- Multiple subscriptions for one channel. Somehow it does not exists in other libraries.
+    - Almost dependency free. This library will work even if the last commit was ten years ago.
 
-- Event inheritance. This should be handled by subscription callbacks not by the pub/sub system.
+The **worst** things that can happen to publish-subscribe library that is **not** here:
 
-- Hellish _wildcards_ - _hierarchical addressing_ - _messages matching_ for each event. First of all this is impossible with numbers or symbols. And this makes no sense as you can create root channel name anyway. I.e. when you publish "app:user:registered" and "app:user:login", just publish "app:user" among others. While when you publish "app:user:re-login", do not publish "app:user" and "re-login" event will be kept _private_ or _unimportant_ to others.
+- ☠️☠️☠️
 
-- Possibility to define context for each callback. You have arrow functions for that. You should not save context in one place and take it hostage. Probably you should use global variables instead etc.
+    - You should have **multiple subscriptions** for one channel. Somehow it does not exists in other libraries.
 
-- Cancel publish event distribution for subscribers. This behavior reserved for Observer pattern.
+    - Event inheritance. This should be handled by subscription callbacks **not by** the publish-subscribe system.
 
-- No order priority for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
+    - Hellish **wildcards-hierarchical addressing-messages matching** for each event. First of all this is impossible with numbers or symbols. And this makes no sense as you can create root channel name anyway. In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others. While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"` event will be kept _private_ or _unimportant_ to others.
+
+- ☠️☠️
+
+    - Possibility to define **context for each callback**. You have arrow functions for that. You should not save context in one place and take it hostage. Probably you should use global variables instead etc.
+
+    - **Cancel publish** event distribution for subscribers. This behavior reserved for Observer pattern.
+
+- ☠️
+
+    - No **order priority** for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
 
 The things you may not like:
 
-- No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility. You can transpile library to CommonJS module via Babel with configuration you need.
+- 🔌🔌🔌
+
+    - No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility. You can transpile library to CommonJS module via Babel with configuration you need.

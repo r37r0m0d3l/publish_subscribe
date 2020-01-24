@@ -64,5 +64,5 @@
   },
   "type": "module",
   "types": "./dist/publish_subscribe.d.ts",
-  "version": "1.0.3"
+  "version": "1.0.4"
 }
