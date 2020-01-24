@@ -143,7 +143,7 @@ Reusable subscription.
 ```js
 /**
  * @param {*} data
- * @param {number|string|symbol} channel
+ * @param {number|string|Symbol} channel
  * @param {string} token
  */
 function synchronousCallback(data, channel, token) {
