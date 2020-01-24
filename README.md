@@ -27,15 +27,15 @@ const pubsub: PublishSubscribe = new PublishSubscribe();
 type IChannel = number|string|symbol;
 const CHANNEL: IChannel = "app";
 //
-const calledOnce: boolean = false;
+const isCalledOnce: boolean = false;
 function syncCallback(data: any, channel: IChannel, token: string): any {
   return true;
 }
 async function asyncCallback(data: any, channel: IChannel, token: string): any {
   return true;
 }
-const tokenSync: string = pubsub.subscribe(CHANNEL, syncCallback, calledOnce);
-const tokenAsync: string = pubsub.subscribe(CHANNEL, syncCallback, calledOnce);
+const tokenSync: string = pubsub.subscribe(CHANNEL, syncCallback, isCalledOnce);
+const tokenAsync: string = pubsub.subscribe(CHANNEL, syncCallback, isCalledOnce);
 //
 const data: any = { someData: "to publish" };
 const resultOnly: boolean = true;
