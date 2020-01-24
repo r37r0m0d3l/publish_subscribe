@@ -23,7 +23,7 @@ JavaScript implementation of the Publish/Subscribe pattern.
 Installation
 
 ```bash
-npm install publish_subscribe
+npm install @r37r0m0d3l/publish_subscribe
 ```
 
 CommonJS
