@@ -1,3 +1,7 @@
+#### 1.0.8 Jan 25, 2020
+
+- ➕ Add sourcemap
+
 #### 1.0.7 Jan 25, 2020
 
 - 🎨 Bundle `lodash.clonedeep` into `./dist/publish_subscribe.min.mjs`
