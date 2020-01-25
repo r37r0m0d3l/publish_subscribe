@@ -1,3 +1,7 @@
+#### 1.0.7 Jan 25, 2020
+
+- 🎨 Bundle `lodash.clonedeep` into `./dist/publish_subscribe.min.mjs`
+
 #### 1.0.6 Jan 25, 2020
 
 - ➕ Add `minify` script
