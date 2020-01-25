@@ -33,6 +33,7 @@
   "files": [
     "dist/publish_subscribe.cjs",
     "dist/publish_subscribe.d.ts",
+    "dist/publish_subscribe.min.mjs",
     "dist/publish_subscribe.mjs"
   ],
   "homepage": "https://github.com/r37r0m0d3l/publish_subscribe#readme",
@@ -64,5 +65,5 @@
   },
   "type": "module",
   "types": "./dist/publish_subscribe.d.ts",
-  "version": "1.0.4"
+  "version": "1.0.5"
 }

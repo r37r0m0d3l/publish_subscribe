@@ -1,3 +1,7 @@
+#### 1.0.5 Jan 25, 2020
+
+- ➕ Add minified file `./dist/publish_subscribe.min.mjs` for testing purposes.
+
 #### 1.0.4 Jan 24, 2020
 
 - ♻️ Refactor `getChannels` method. Now channels defined as `Symbol` are private. However you can still check it using `hasChannel` method.
