@@ -61,9 +61,10 @@
   },
   "scripts": {
     "lint": "npx eslint ./src/publish_subscribe.mjs",
+    "minify": "terser --no-minifier --compress --mangle --module --verbose --warn --ecma 8 --verbose --output ./dist/publish_subscribe.min.mjs -- ./src/publish_subscribe.mjs",
     "test": "jest"
   },
   "type": "module",
   "types": "./dist/publish_subscribe.d.ts",
-  "version": "1.0.5"
+  "version": "1.0.6"
 }

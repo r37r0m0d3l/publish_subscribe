@@ -1,3 +1,7 @@
+#### 1.0.6 Jan 25, 2020
+
+- ➕ Add `minify` script
+
 #### 1.0.5 Jan 25, 2020
 
 - ➕ Add minified file `./dist/publish_subscribe.min.mjs` for testing purposes.
