@@ -360,12 +360,12 @@ The things you may not like:
 
 You also might be interested in my other repositories:
 
-- [Consono](https://github.com/r37r0m0d3l/consono) - The most informative and correct variable inspector for JavaScript on the web.
+- [Consono](https://r37r0m0d3l.github.io/consono) - The most informative and correct variable inspector for JavaScript on the web.
 
 - [Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage) - Universal localStorage fallback.
 
-- [Vicis](https://github.com/r37r0m0d3l/vicis) - Presentation and transformation layer for data output in RESTful APIs.
+- [Vicis](https://r37r0m0d3l.github.io/vicis) - Presentation and transformation layer for data output in RESTful APIs.
 
 Or find useful these tools:
 
-- [JSON Sorter](https://r37r0m0d3l.github.io/json_sort/) - Neat online JSON sorter.
+- [JSON Sorter](https://r37r0m0d3l.github.io/json_sort) - Neat online JSON sorter.
