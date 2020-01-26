@@ -1,6 +1,6 @@
-#### 1.0.9 Jan 25, 2020
+#### 1.1.0 Jan 26, 2020
 
-- ➕ Add sourcemap
+- 🚚️ Bundle AMD, UMD, CommonJS into `./dist/publish_subscribe.js`
 
 #### 1.0.7 Jan 25, 2020
 

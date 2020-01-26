@@ -1,4 +1,4 @@
-# Publish-Subscribe
+# Publish Subscribe
 
 JavaScript implementation of the Publish-Subscribe pattern.
 
@@ -16,7 +16,6 @@ JavaScript implementation of the Publish-Subscribe pattern.
 [![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/publish_subscribe.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/publish_subscribe)
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/publish_subscribe)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/publish_subscribe.svg?style=social&label=Fork)]()
-[![Twitter](https://img.shields.io/twitter/follow/r37r0m0d3l.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=r37r0m0d3l)
 
 ## Tl;dr
 
@@ -71,6 +70,16 @@ ECMAScript Modules.
 ```typescript
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 ```
+
+## Script
+
+UNPKG CDN.
+
+```html
+<script src="https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.js"></script>
+```
+
+## Creating Instance
 
 ```js
 const pubsub = new PublishSubscribe();
@@ -346,3 +355,17 @@ The things you may not like:
 - 🔌🔌🔌
 
     - No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility. You can transpile library to CommonJS module via Babel with configuration you need.
+
+## Advertisement
+
+You also might be interested in my other repositories:
+
+- [Consono](https://github.com/r37r0m0d3l/consono) - The most informative and correct variable inspector for JavaScript on the web.
+
+- [Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage) - Universal localStorage fallback.
+
+- [Vicis](https://github.com/r37r0m0d3l/vicis) - Presentation and transformation layer for data output in RESTful APIs.
+
+Or find useful these tools:
+
+- [JSON Sorter](https://r37r0m0d3l.github.io/json_sort/) - Neat online JSON sorter.

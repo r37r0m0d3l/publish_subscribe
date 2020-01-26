@@ -33,7 +33,7 @@
   "files": [
     "dist/publish_subscribe.cjs",
     "dist/publish_subscribe.d.ts",
-    "dist/publish_subscribe.min.mjs",
+    "dist/publish_subscribe.js",
     "dist/publish_subscribe.mjs"
   ],
   "homepage": "https://github.com/r37r0m0d3l/publish_subscribe#readme",
@@ -61,10 +61,10 @@
   },
   "scripts": {
     "lint": "npx eslint ./src/publish_subscribe.mjs",
-    "minify": "terser --source-map --no-minifier --compress --mangle --module --verbose --warn --ecma 8 --verbose --output ./dist/publish_subscribe.min.mjs -- ./src/publish_subscribe.mjs",
+    "minify": "terser --keep-classnames --keep-fnames --no-minifier --compress --mangle --module --verbose --warn --ecma 8 --verbose --output ./dist/publish_subscribe.js -- ./src/publish_subscribe.mjs",
     "test": "jest"
   },
   "type": "module",
   "types": "./dist/publish_subscribe.d.ts",
-  "version": "1.0.9"
+  "version": "1.1.0"
 }
