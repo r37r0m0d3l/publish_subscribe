@@ -9,6 +9,7 @@ JavaScript implementation of the Publish-Subscribe pattern.
 [![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/publish_subscribe/badge.svg?targetFile=package.json)](https://snyk.io/test/github/r37r0m0d3l/publish_subscribe?targetFile=package.json)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/6b1544ba3a56a4df3e43/maintainability)](https://codeclimate.com/github/r37r0m0d3l/publish_subscribe/maintainability)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d56de445cce64ea399f7234f24b1d870)](https://www.codacy.com/manual/r37r0m0d3l/publish_subscribe?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=r37r0m0d3l/publish_subscribe&amp;utm_campaign=Badge_Grade)
 [![Dependency Status](https://david-dm.org/r37r0m0d3l/publish_subscribe.svg)](https://david-dm.org/r37r0m0d3l/publish_subscribe)
 [![devDependencies Status](https://david-dm.org/r37r0m0d3l/publish_subscribe/dev-status.svg)](https://david-dm.org/r37r0m0d3l/publish_subscribe?type=dev)
 
@@ -48,7 +49,6 @@ const resultsSync = pubsub
   const resultsAsync = await pubsub
     .publishAsync(CHANNEL, data, resultOnly, cloneData);
 })();
-//
 ```
 
 ## Usage
@@ -298,74 +298,74 @@ pubsub.dropAll();
 
 Yet another publish-subscribe library? Why this library exists:
 
-- ⭐⭐⭐
+-   ⭐⭐⭐
 
-    - Preventing published data changes between subscriptions.
+    -   Preventing published data changes between subscriptions.
 
-    - Possibility to publish events asynchronously.
+    -   Possibility to publish events asynchronously.
 
-    - Possibility to do synchronous publishing and receive data from subscriptions.
+    -   Possibility to do synchronous publishing and receive data from subscriptions.
 
-    - Possibility to use async callbacks in subscriptions.
+    -   Possibility to use async callbacks in subscriptions.
 
-    - Get subscription callback function by token and use it somewhere else.
+    -   Get subscription callback function by token and use it somewhere else.
 
-    - Error swallowing. Publish-subscribe pattern should not broke on some function somewhere deep in code.
+    -   Error swallowing. Publish-subscribe pattern should not broke on some function somewhere deep in code.
 
-- ⭐⭐
+-   ⭐⭐
 
-    - Possibility to use finite numbers, strings or symbols as channel names.
+    -   Possibility to use finite numbers, strings or symbols as channel names.
 
-    - Subscription functions receive callback token among channel name and published data.
+    -   Subscription functions receive callback token among channel name and published data.
 
-    - Has _subscribeOnce_ method.
+    -   Has _subscribeOnce_ method.
 
-    - Has _onPublish_ method for _global message matching_.
+    -   Has _onPublish_ method for _global message matching_.
 
-- ⭐
+-   ⭐
 
-    - Custom logging into console for most actions.
+    -   Custom logging into console for most actions.
 
-    - TypeScript definitions.
+    -   TypeScript definitions.
 
-    - Almost dependency free. This library will work even if the last commit was ten years ago.
+    -   Almost dependency free. This library will work even if the last commit was ten years ago.
 
 The **worst** things that can happen to publish-subscribe library that is **not** here:
 
-- ☠️☠️☠️
+-   ☠️☠️☠️
 
-    - You should have **multiple subscriptions** for one channel. Somehow it does not exists in other libraries.
+    -   You should have **multiple subscriptions** for one channel. Somehow it does not exists in other libraries.
 
-    - Event inheritance. This should be handled by subscription callbacks **not by** the publish-subscribe system.
+    -   Event inheritance. This should be handled by subscription callbacks **not by** the publish-subscribe system.
 
-    - Hellish **wildcards-hierarchical addressing-messages matching** for each event. First of all this is impossible with numbers or symbols. And this makes no sense as you can create root channel name anyway. In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others. While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"` event will be kept _private_ or _unimportant_ to others.
+    -   Hellish **wildcards-hierarchical addressing-messages matching** for each event. First of all this is impossible with numbers or symbols. And this makes no sense as you can create root channel name anyway. In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others. While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"` event will be kept _private_ or _unimportant_ to others.
 
-- ☠️☠️
+-   ☠️☠️
 
-    - Possibility to define **context for each callback**. You have arrow functions for that. You should not save context in one place and take it hostage. Probably you should use global variables instead etc.
+    -   Possibility to define **context for each callback**. You have arrow functions for that. You should not save context in one place and take it hostage. Probably you should use global variables instead etc.
 
-    - **Cancel publish** event distribution for subscribers. This behavior reserved for Observer pattern.
+    -   **Cancel publish** event distribution for subscribers. This behavior reserved for Observer pattern.
 
-- ☠️
+-   ☠️
 
-    - No **order priority** for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
+    -   No **order priority** for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
 
 The things you may not like:
 
-- 🔌🔌🔌
+-   🔌🔌🔌
 
-    - No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility. You can transpile library to CommonJS module via Babel with configuration you need.
+    -   No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility. You can transpile library to CommonJS module via Babel with configuration you need.
 
 ## 👀 Discover more 👀
 
-- 🔎[Consono](https://r37r0m0d3l.github.io/consono)🔎 - The most informative and correct variable inspector for JavaScript on the web.
+-   🔎[Consono](https://r37r0m0d3l.github.io/consono)🔎 - The most informative and correct variable inspector for JavaScript on the web.
 
-- 🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
+-   🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
 
-- 🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
+-   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
 
-- 🧰[Vicis](https://r37r0m0d3l.github.io/vicis)🧰 - Presentation and transformation layer for data output in RESTful APIs.
+-   🧰[Vicis](https://r37r0m0d3l.github.io/vicis)🧰 - Presentation and transformation layer for data output in RESTful APIs.
 
 Or find useful these tools:
 
-- 🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Neat online JSON sorter.
+-   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Neat online JSON sorter.
