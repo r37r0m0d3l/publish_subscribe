@@ -65,6 +65,10 @@ CommonJS.
 const PublishSubscribe = require("@r37r0m0d3l/publish_subscribe").default;
 ```
 
+```js
+const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
+```
+
 ECMAScript Modules.
 
 ```typescript
