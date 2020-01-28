@@ -1,4 +1,4 @@
-import cloneDeep from "lodash.clonedeep";
+const cloneDeep = require("lodash.clonedeep");
 
 const CALLBACK_STUB = () => {};
 const PROTOTYPE_ASYNC = "[object AsyncFunction]";
@@ -682,5 +682,5 @@ class PublishSubscribe {
   }
 }
 
-export default PublishSubscribe;
-export { PublishSubscribe };
+module.exports.default = PublishSubscribe;
+module.exports.PublishSubscribe = PublishSubscribe;

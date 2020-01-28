@@ -362,13 +362,13 @@ The things you may not like:
 
 ## 👀 Discover more 👀
 
--   🔎[Consono](https://r37r0m0d3l.github.io/consono)🔎 - The most informative and correct variable inspector for JavaScript on the web.
+-   🔎[Consono](https://consono.js.org)🔎 - The most informative and correct variable inspector for JavaScript on the web.
 
--   🌠[OF](https://r37r0m0d3l.github.io/of/)🌠 - Promise wrapper with some sugar.
+-   🌠[OF](https://of.js.org)🌠 - Promise wrapper with some sugar.
 
 -   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
 
--   🧰[Vicis](https://r37r0m0d3l.github.io/vicis)🧰 - Presentation and transformation layer for data output in RESTful APIs.
+-   🧰[Vicis](https://vicis.js.org)🧰 - Presentation and transformation layer for data output in RESTful APIs.
 
 Or find useful these tools:
 
