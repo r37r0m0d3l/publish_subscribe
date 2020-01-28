@@ -20,7 +20,7 @@ JavaScript implementation of the Publish-Subscribe pattern.
 [![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/publish_subscribe)
 [![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/publish_subscribe.svg?style=social&label=Fork)]()
 
-## Tl;dr
+## 🏃💨 Tl;dr
 
 ```typescript
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
@@ -33,11 +33,17 @@ const isCalledOnce: boolean = false;
 function syncCallback(data: any, channel: IChannel, token: string): any {
   return true;
 }
-async function asyncCallback(data: any, channel: IChannel, token: string): any {
+async function asyncCallback(
+  data: any,
+  channel: IChannel,
+  token: string
+): any {
   return true;
 }
-const tokenSync: string = pubsub.subscribe(CHANNEL, syncCallback, isCalledOnce);
-const tokenAsync: string = pubsub.subscribe(CHANNEL, syncCallback, isCalledOnce);
+const tokenSync: string = pubsub
+  .subscribe(CHANNEL, syncCallback, isCalledOnce);
+const tokenAsync: string = pubsub
+  .subscribe(CHANNEL, syncCallback, isCalledOnce);
 //
 const data: any = { someData: "to publish" };
 const resultOnly: boolean = true;
@@ -53,7 +59,7 @@ const resultsSync = pubsub
 })();
 ```
 
-## Usage
+## 📦 Usage
 
 Installation.
 
@@ -77,21 +83,21 @@ ECMAScript Modules.
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 ```
 
-## Script
-
 UNPKG CDN.
 
 ```html
-<script src="https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.js"></script>
+<script
+  src="https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.js"
+></script>
 ```
 
-## Creating Instance
+## ⌨ Creating Instance
 
 ```js
 const pubsub = new PublishSubscribe();
 ```
 
-## Logging
+## ℹ Logging
 
 Set log function.
 
@@ -121,7 +127,7 @@ pubsub.setLogging((info) => {
 pubsub.disableLogging();
 ```
 
-## Naming Channels
+## 📛 Naming Channels
 
 Channels can be finite numbers, strings or symbols.
 
@@ -132,14 +138,16 @@ const CHANNEL_NAME_AS_SYMBOL = Symbol("ThisChannelLookVeryPrivate");
 const CHANNEL = "channel_name";
 ```
 
-## Subscription
+## 📩 Subscription
 
 Synchronous subscription.
 
 ```js
 const tokenOfSynchronous = pubsub
   .subscribe("channel_name", function sync(data, channel, token) {
-    return { message: "Here can by any kind data for synchronous functions" };
+    return {
+      message: "Here can by any kind data for synchronous functions"
+    };
   });
 ```
 
@@ -174,7 +182,7 @@ No need for token as subscription will expire after first successful call.
 pubsub.subscribeOnce("channel_exit", (data, channel, _token) => {});
 ```
 
-## Publishing Events
+## 📨 Publishing Events
 
 Intercept all publishing.
 
@@ -219,7 +227,8 @@ Get synchronous and asynchronous results from subscribers.
 pubsub
   .publishAsync("channel_name", { data: "the data" }, false)
     .then((results) => {
-      // results here also contains additional array of data from subscribers
+      // results here also contains
+      // additional array of data from subscribers
       // [ { channel: "app", result: "data", token: "zzroUP97lnxL0VUa" } ]
     });
 ```
@@ -230,7 +239,7 @@ Do not wait anything from subscribers - use `publish`.
 pubsub.publish("channel_name", { data: "the data" });
 ```
 
-## Unsubscribe
+## 📪 Unsubscribe
 
 Unsubscribe via token previously retrieved from `subscribe` method.
 
@@ -261,7 +270,7 @@ pubsub.unsubscribe(callbackOrChannelOrToken);
 pubsub.unsubscribe(channel, callback);
 ```
 
-## Utilities
+## 🛠️ Utilities
 
 Retrieve callback function via token.
 
@@ -300,7 +309,7 @@ Clear instance.
 pubsub.dropAll();
 ```
 
-## About
+## 🤷 About
 
 Yet another publish-subscribe library? Why this library exists:
 
