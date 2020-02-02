@@ -63,6 +63,7 @@
     "url": "git+https://github.com/r37r0m0d3l/publish_subscribe.git"
   },
   "scripts": {
+    "docs-serve": "docsify serve docs",
     "lint": "npx eslint ./src/publish_subscribe.js",
     "lint-md": "remark .",
     "minify": "terser --keep-classnames --keep-fnames --no-minifier --compress --mangle --module --verbose --warn --ecma 8 --verbose --output ./dist/publish_subscribe.js -- ./src/publish_subscribe.js",
@@ -70,5 +71,5 @@
   },
   "type": "module",
   "types": "./dist/publish_subscribe.d.ts",
-  "version": "1.1.5"
+  "version": "1.1.6"
 }
