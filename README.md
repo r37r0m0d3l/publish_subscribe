@@ -91,14 +91,6 @@ ECMAScript Modules.
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 ```
 
-UNPKG CDN.
-
-```html
-<script
-  src="https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.js"
-></script>
-```
-
 ## ⌨ Creating Instance
 
 ```js
