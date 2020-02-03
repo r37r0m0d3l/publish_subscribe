@@ -2,6 +2,8 @@
 
 JavaScript implementation of the Publish-Subscribe pattern.
 
+[🗎 Publish Subscribe Documentation 🗎](https://publish-subscribe.js.org)
+
 [![NPM Version](https://img.shields.io/npm/v/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
 [![Build Status](https://travis-ci.org/r37r0m0d3l/publish_subscribe.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/publish_subscribe)

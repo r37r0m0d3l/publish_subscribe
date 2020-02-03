@@ -1,3 +1,7 @@
+#### 1.1.7 Feb 03, 2020
+
+-   📚 Update documentation
+
 #### 1.1.6 Feb 02, 2020
 
 -   📚 Update documentation
