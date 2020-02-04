@@ -75,10 +75,10 @@ function objectSize(object) {
 }
 
 class Subscription {
-  callback;
-  channel;
-  once;
-  token;
+  // callback;
+  // channel;
+  // once;
+  // token;
   constructor(channel, callback, once = false) {
     this.callback = callback;
     this.channel = channel;
@@ -91,47 +91,50 @@ class Subscription {
  * @class PublishSubscribe
  */
 class PublishSubscribe {
-  #channels = new Set();
-  #createChannel;
-  #createSubscription;
-  #hasLogging;
-  #isValidCallback;
-  #isValidChannel;
-  #isValidToken;
-  #logging;
-  #onPublish;
-  #subscriptions = new Map();
+  // __channels = new Set();
+  // __createChannel;
+  // __createSubscription;
+  // __hasLogging;
+  // __isValidCallback;
+  // __isValidChannel;
+  // __isValidToken;
+  // __logging;
+  // __onPublish;
+  // __subscriptions = new Map();
   /**
    * @name constructor
    * @public
    * @constructor
    */
   constructor() {
-    this.#isValidCallback = function isValidCallback(callback) {
+    this.__channels = new Set();
+    this.__onPublish = CALLBACK_STUB;
+    this.__subscriptions = new Map();
+    this.__isValidCallback = function isValidCallback(callback) {
       if (!callback) {
         return false;
       }
       return [PROTOTYPE_ASYNC, PROTOTYPE_SYNC].includes(getPrototypeName(callback));
     }.bind(this);
-    this.#isValidChannel = function isValidChannel(channel) {
+    this.__isValidChannel = function isValidChannel(channel) {
       return (
         typeof channel === "string" ||
         typeof channel === "symbol" ||
         (typeof channel === "number" && Number.isFinite(channel))
       );
     }.bind(this);
-    this.#isValidToken = function isValidToken(token) {
+    this.__isValidToken = function isValidToken(token) {
       return typeof token === "string" && token.length === TOKEN_LENGTH;
     }.bind(this);
-    this.#createChannel = function createChannel(channel) {
+    this.__createChannel = function createChannel(channel) {
       if (!this.hasChannel(channel)) {
-        this.#channels.add(channel);
-        this.#subscriptions.set(channel, newObject());
+        this.__channels.add(channel);
+        this.__subscriptions.set(channel, newObject());
       }
     }.bind(this);
-    this.#createSubscription = function createSubscription(channel, callback, once) {
+    this.__createSubscription = function createSubscription(channel, callback, once) {
       const subscription = new Subscription(channel, callback, once);
-      const subscriptionReference = this.#subscriptions.get(channel);
+      const subscriptionReference = this.__subscriptions.get(channel);
       subscriptionReference[subscription.token] = subscription;
       return subscription.token;
     }.bind(this);
@@ -145,8 +148,8 @@ class PublishSubscribe {
    * @returns {void}
    */
   disableLogging() {
-    this.#logging = CALLBACK_STUB;
-    this.#hasLogging = false;
+    this.__logging = CALLBACK_STUB;
+    this.__hasLogging = false;
   }
   /**
    * @name dropAll
@@ -154,9 +157,9 @@ class PublishSubscribe {
    * @returns {void}
    */
   dropAll() {
-    this.#logging("dropAll");
-    this.#channels.clear();
-    this.#subscriptions.clear();
+    this.__logging("dropAll");
+    this.__channels.clear();
+    this.__subscriptions.clear();
   }
   /**
    * @name dropChannel
@@ -165,12 +168,12 @@ class PublishSubscribe {
    * @returns {void}
    */
   dropChannel(channel) {
-    this.#logging("dropChannel", { channel });
+    this.__logging("dropChannel", { channel });
     if (!this.hasChannel(channel)) {
       return;
     }
-    this.#channels.delete(channel);
-    this.#subscriptions.set(channel, newObject());
+    this.__channels.delete(channel);
+    this.__subscriptions.set(channel, newObject());
   }
   /**
    * @name getCallback
@@ -180,11 +183,11 @@ class PublishSubscribe {
    * @returns {void|Function}
    */
   getCallback(token) {
-    if (!this.#isValidToken(token)) {
+    if (!this.__isValidToken(token)) {
       return;
     }
     let callback = undefined;
-    Array.from(this.#subscriptions.values()).some((subscriptions) => {
+    Array.from(this.__subscriptions.values()).some((subscriptions) => {
       if (!(token in subscriptions)) {
         return false;
       }
@@ -199,7 +202,7 @@ class PublishSubscribe {
    * @returns {Array.<number|string>}
    */
   getChannels() {
-    return Array.from(this.#channels)
+    return Array.from(this.__channels)
       .filter((channel) => typeof channel !== "symbol")
       .sort((alpha, beta) => alpha.localeCompare(beta));
   }
@@ -210,7 +213,7 @@ class PublishSubscribe {
    * @returns {boolean}
    */
   hasChannel(channel) {
-    return this.#channels.has(channel);
+    return this.__channels.has(channel);
   }
   /**
    * @name hasSubscription
@@ -222,10 +225,10 @@ class PublishSubscribe {
     if (!this.hasChannel(channel)) {
       return false;
     }
-    if (!this.#subscriptions.has(channel)) {
+    if (!this.__subscriptions.has(channel)) {
       return false;
     }
-    return !isObjectEmpty(this.#subscriptions.get(channel));
+    return !isObjectEmpty(this.__subscriptions.get(channel));
   }
   /**
    * @name onPublish
@@ -235,13 +238,13 @@ class PublishSubscribe {
    */
   onPublish(callback = undefined) {
     if (callback === undefined) {
-      this.#onPublish = CALLBACK_STUB;
+      this.__onPublish = CALLBACK_STUB;
       return;
     }
-    if (!this.#isValidCallback(callback)) {
+    if (!this.__isValidCallback(callback)) {
       return;
     }
-    this.#onPublish = (channel, data) => {
+    this.__onPublish = (channel, data) => {
       call(callback, [channel, data]);
     };
   }
@@ -260,13 +263,13 @@ class PublishSubscribe {
     } else {
       getData = () => data;
     }
-    this.#logging("publish", { channel, data: getData() });
-    this.#onPublish(channel, getData());
+    this.__logging("publish", { channel, data: getData() });
+    this.__onPublish(channel, getData());
     if (!this.hasChannel(channel)) {
       return;
     }
     const promises = [];
-    const subscriptionReference = this.#subscriptions.get(channel);
+    const subscriptionReference = this.__subscriptions.get(channel);
     objectKeys(subscriptionReference).forEach((token) => {
       const subscription = subscriptionReference[token];
       const callbackReference = subscription.callback;
@@ -274,8 +277,8 @@ class PublishSubscribe {
         case PROTOTYPE_ASYNC:
           promises.push(
             new Promise((resolve) => {
-              if (this.#hasLogging) {
-                this.#logging("publish -> send", {
+              if (this.__hasLogging) {
+                this.__logging("publish -> send", {
                   channel,
                   data: getData(),
                   token,
@@ -286,8 +289,8 @@ class PublishSubscribe {
                 .then((promiseResult) => {
                   resultForPromise = { channel, result: promiseResult, token };
                   resolve(resultForPromise);
-                  if (this.#hasLogging) {
-                    this.#logging("publish -> receive", {
+                  if (this.__hasLogging) {
+                    this.__logging("publish -> receive", {
                       channel,
                       result: clone(promiseResult),
                       token,
@@ -300,8 +303,8 @@ class PublishSubscribe {
                 .catch((error) => {
                   resultForPromise = { channel, result: error, token };
                   resolve(resultForPromise);
-                  if (this.#hasLogging) {
-                    this.#logging("publish -> receive", {
+                  if (this.__hasLogging) {
+                    this.__logging("publish -> receive", {
                       channel,
                       result: error,
                       token,
@@ -317,8 +320,8 @@ class PublishSubscribe {
         case PROTOTYPE_SYNC:
           promises.push(
             new Promise((resolve) => {
-              if (this.#hasLogging) {
-                this.#logging("publish -> send", {
+              if (this.__hasLogging) {
+                this.__logging("publish -> send", {
                   channel,
                   data: getData(),
                   token,
@@ -331,8 +334,8 @@ class PublishSubscribe {
                 resultForPromise = error;
               }
               resolve({ channel, result: resultForPromise, token });
-              if (this.#hasLogging) {
-                this.#logging("publish -> receive", {
+              if (this.__hasLogging) {
+                this.__logging("publish -> receive", {
                   channel,
                   result: clone(resultForPromise),
                   token,
@@ -364,15 +367,15 @@ class PublishSubscribe {
     } else {
       getData = () => data;
     }
-    if (this.#hasLogging) {
-      this.#logging("publishAsync", { channel, data: getData() });
+    if (this.__hasLogging) {
+      this.__logging("publishAsync", { channel, data: getData() });
     }
-    this.#onPublish(channel, getData());
+    this.__onPublish(channel, getData());
     if (!this.hasChannel(channel)) {
       return Promise.all([]);
     }
     const promises = [];
-    const subscriptionReference = this.#subscriptions.get(channel);
+    const subscriptionReference = this.__subscriptions.get(channel);
     objectKeys(subscriptionReference).forEach((token) => {
       const subscription = subscriptionReference[token];
       const callbackReference = subscription.callback;
@@ -380,8 +383,8 @@ class PublishSubscribe {
         case PROTOTYPE_ASYNC:
           promises.push(
             new Promise((resolve) => {
-              if (this.#hasLogging) {
-                this.#logging("publishAsync -> send", {
+              if (this.__hasLogging) {
+                this.__logging("publishAsync -> send", {
                   channel,
                   data: getData(),
                   token,
@@ -392,8 +395,8 @@ class PublishSubscribe {
                 .then((promiseResult) => {
                   resultForPromise = { channel, result: promiseResult, token };
                   resolve(resultForPromise);
-                  if (this.#hasLogging) {
-                    this.#logging("publishAsync -> receive", {
+                  if (this.__hasLogging) {
+                    this.__logging("publishAsync -> receive", {
                       channel,
                       result: clone(promiseResult),
                       token,
@@ -406,8 +409,8 @@ class PublishSubscribe {
                 .catch((error) => {
                   resultForPromise = { channel, result: error, token };
                   resolve(resultForPromise);
-                  if (this.#hasLogging) {
-                    this.#logging("publishAsync -> receive", {
+                  if (this.__hasLogging) {
+                    this.__logging("publishAsync -> receive", {
                       channel,
                       result: error,
                       token,
@@ -423,8 +426,8 @@ class PublishSubscribe {
         case PROTOTYPE_SYNC:
           promises.push(
             new Promise((resolve) => {
-              if (this.#hasLogging) {
-                this.#logging("publishAsync -> send", {
+              if (this.__hasLogging) {
+                this.__logging("publishAsync -> send", {
                   channel,
                   data: getData(),
                   token,
@@ -437,8 +440,8 @@ class PublishSubscribe {
                 resultForPromise = error;
               }
               resolve({ channel, result: resultForPromise, token });
-              if (this.#hasLogging) {
-                this.#logging("publishAsync -> receive", {
+              if (this.__hasLogging) {
+                this.__logging("publishAsync -> receive", {
                   channel,
                   result: clone(resultForPromise),
                   token,
@@ -474,12 +477,12 @@ class PublishSubscribe {
     } else {
       getData = () => data;
     }
-    if (this.#hasLogging) {
-      this.#logging("publishSync", { channel, data: getData() });
+    if (this.__hasLogging) {
+      this.__logging("publishSync", { channel, data: getData() });
     }
-    this.#onPublish(channel, getData());
+    this.__onPublish(channel, getData());
     let curryCallback;
-    if (callback && this.#isValidCallback(callback)) {
+    if (callback && this.__isValidCallback(callback)) {
       curryCallback = (args) => call(callback, [args]);
     } else {
       curryCallback = () => {};
@@ -488,7 +491,7 @@ class PublishSubscribe {
       curryCallback([]);
       return [];
     }
-    const subscriptionReference = this.#subscriptions.get(channel);
+    const subscriptionReference = this.__subscriptions.get(channel);
     let results = [];
     objectKeys(subscriptionReference).forEach((token) => {
       const subscription = subscriptionReference[token];
@@ -496,8 +499,8 @@ class PublishSubscribe {
       if (getPrototypeName(callbackReference) !== PROTOTYPE_SYNC) {
         return;
       }
-      if (this.#hasLogging) {
-        this.#logging("publishSync -> send", {
+      if (this.__hasLogging) {
+        this.__logging("publishSync -> send", {
           channel,
           data: getData(),
           token,
@@ -510,8 +513,8 @@ class PublishSubscribe {
         result = error;
       }
       results.push({ channel, result, token });
-      if (this.#hasLogging) {
-        this.#logging("publishSync -> receive", {
+      if (this.__hasLogging) {
+        this.__logging("publishSync -> receive", {
           channel,
           result: clone(result),
           token,
@@ -534,27 +537,27 @@ class PublishSubscribe {
    * @returns {void}
    */
   setLogging(callback) {
-    if (!this.#isValidCallback(callback)) {
+    if (!this.__isValidCallback(callback)) {
       return;
     }
     switch (getPrototypeName(callback)) {
       case PROTOTYPE_ASYNC:
-        this.#logging = (method, info) => {
+        this.__logging = (method, info) => {
           callback({ ...info, method })
             .then(() => {})
             .catch(() => {});
         };
-        this.#hasLogging = true;
+        this.__hasLogging = true;
         break;
       case PROTOTYPE_SYNC:
-        this.#logging = (method, info) => {
+        this.__logging = (method, info) => {
           try {
             callback({ ...info, method });
           } catch (_error) {
             //
           }
         };
-        this.#hasLogging = true;
+        this.__hasLogging = true;
         break;
     }
   }
@@ -568,15 +571,15 @@ class PublishSubscribe {
    * @throws TypeError
    */
   subscribe(channel, callback, once = false) {
-    this.#logging("subscribe", { channel, callback, once });
-    if (!this.#isValidChannel(channel)) {
+    this.__logging("subscribe", { channel, callback, once });
+    if (!this.__isValidChannel(channel)) {
       return new TypeError("Channel name should be String, Symbol, Number.");
     }
-    if (!this.#isValidCallback(callback)) {
+    if (!this.__isValidCallback(callback)) {
       return new TypeError("Callback should be a function.");
     }
-    this.#createChannel(channel);
-    return this.#createSubscription(channel, callback, once);
+    this.__createChannel(channel);
+    return this.__createSubscription(channel, callback, once);
   }
   /**
    * @name subscribeOnce
@@ -587,15 +590,15 @@ class PublishSubscribe {
    * @throws TypeError
    */
   subscribeOnce(channel, callback) {
-    this.#logging("subscribeOnce", { channel, callback });
-    if (!this.#isValidChannel(channel)) {
+    this.__logging("subscribeOnce", { channel, callback });
+    if (!this.__isValidChannel(channel)) {
       return new TypeError("Channel name should be String, Symbol, Number.");
     }
-    if (!this.#isValidCallback(callback)) {
+    if (!this.__isValidCallback(callback)) {
       return new TypeError("Callback should be a function.");
     }
-    this.#createChannel(channel);
-    return this.#createSubscription(channel, callback);
+    this.__createChannel(channel);
+    return this.__createSubscription(channel, callback);
   }
   /**
    * @name unsubscribe
@@ -608,10 +611,10 @@ class PublishSubscribe {
     if (callback !== undefined) {
       return this.unsubscribeByChannelAndCallback(callbackChannelToken, callback);
     }
-    if (this.#isValidCallback(callbackChannelToken)) {
+    if (this.__isValidCallback(callbackChannelToken)) {
       return this.unsubscribeByCallback(callbackChannelToken);
     }
-    if (this.#isValidToken(callbackChannelToken)) {
+    if (this.__isValidToken(callbackChannelToken)) {
       return this.unsubscribeByToken(callbackChannelToken);
     }
     return 0;
@@ -623,12 +626,12 @@ class PublishSubscribe {
    * @returns {number}
    */
   unsubscribeByCallback(callback) {
-    this.#logging("unsubscribeByCallback", { callback });
-    if (!this.#isValidCallback(callback)) {
+    this.__logging("unsubscribeByCallback", { callback });
+    if (!this.__isValidCallback(callback)) {
       return 0;
     }
     let deleted = 0;
-    this.#subscriptions.forEach((subscriptions) => {
+    this.__subscriptions.forEach((subscriptions) => {
       objectKeys(subscriptions).forEach((key) => {
         if (isSame(subscriptions[key].callback, callback)) {
           delete subscriptions[key];
@@ -646,11 +649,11 @@ class PublishSubscribe {
    * @returns {number}
    */
   unsubscribeByChannelAndCallback(channel, callback) {
-    this.#logging("unsubscribeByChannelAndCallback", { callback });
+    this.__logging("unsubscribeByChannelAndCallback", { callback });
     if (!this.hasSubscription(channel)) {
       return 0;
     }
-    const subscriptions = this.#subscriptions.get(channel);
+    const subscriptions = this.__subscriptions.get(channel);
     let deleted = 0;
     objectKeys(subscriptions).forEach((key) => {
       if (isSame(subscriptions[key].callback, callback)) {
@@ -667,12 +670,12 @@ class PublishSubscribe {
    * @returns {number}
    */
   unsubscribeByToken(token) {
-    this.#logging("unsubscribeByToken", { token });
-    if (!this.#isValidToken(token)) {
+    this.__logging("unsubscribeByToken", { token });
+    if (!this.__isValidToken(token)) {
       return 0;
     }
     let deleted = 0;
-    this.#subscriptions.forEach((subscriptions) => {
+    this.__subscriptions.forEach((subscriptions) => {
       if (token in subscriptions) {
         delete subscriptions[token];
         deleted += 1;
