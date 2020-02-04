@@ -1,3 +1,7 @@
+#### 1.2.1 Feb 04, 2020
+
+-   📚 Update documentation
+
 #### 1.2.0 Feb 04, 2020
 
 -   ♻️ Remove all private fields for better debugging
