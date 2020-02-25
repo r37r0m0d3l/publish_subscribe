@@ -1,6 +1,12 @@
+#### 1.2.2 Feb 25, 2020
+
+-   ⬆️ Dependencies updated
+
+-   📚 Documentation updated
+
 #### 1.2.1 Feb 04, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.2.0 Feb 04, 2020
 
@@ -8,35 +14,35 @@
 
 #### 1.1.8 Feb 04, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.1.7 Feb 03, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.1.6 Feb 02, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.1.5 Jan 31, 2020
 
--   ⬆️ Update dependencies
+-   ⬆️ Dependencies updated
 
 #### 1.1.4 Jan 27, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.1.3 Jan 28, 2020
 
--   ⬆️ Update dependencies
+-   ⬆️ Dependencies updated
 
 #### 1.1.2 Jan 27, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.1.1 Jan 27, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.1.0 Jan 26, 2020
 
@@ -56,9 +62,11 @@
 
 #### 1.0.4 Jan 24, 2020
 
--   ♻️ Refactor `getChannels` method. Now channels defined as `Symbol` are private. However you can still check it using `hasChannel` method.
+-   ♻️ Refactor `getChannels` method.
+Now channels defined as `Symbol` are private.
+However you can still check it using `hasChannel` method.
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.0.3 Jan 23, 2020
 
@@ -66,7 +74,7 @@
 
 #### 1.0.2 Jan 23, 2020
 
--   📚 Update documentation
+-   📚 Documentation updated
 
 #### 1.0.1 Jan 23, 2020
 

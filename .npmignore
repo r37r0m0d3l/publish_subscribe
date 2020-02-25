@@ -13,6 +13,7 @@
 /.prettierignore
 /.prettierrc
 /.remarkrc
+/.sonarcloud.properties
 /.travis.yml
 /.yarnrc
 /CHANGELOG.md
@@ -24,4 +25,3 @@
 /src/
 /temp/
 /test/
-/yarn.lock

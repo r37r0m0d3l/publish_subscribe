@@ -18,7 +18,8 @@ JavaScript implementation of the Publish-Subscribe pattern.
 
 ---
 
-_If you use this project don't forget to give a ⭐ [star](https://github.com/r37r0m0d3l/publish_subscribe) ⭐ to it on GitHub!_
+*If you use this project don't forget to give a
+⭐ [star](https://github.com/r37r0m0d3l/publish_subscribe) ⭐ to it on GitHub!*
 
 ---
 
@@ -392,9 +393,9 @@ Yet another publish-subscribe library? Why this library exists:
 
     -   Subscription functions receive callback token among channel name and published data.
 
-    -   Has _subscribeOnce_ method.
+    -   Has *subscribeOnce* method.
 
-    -   Has _onPublish_ method for _global message matching_.
+    -   Has *onPublish* method for *global message matching*.
 
 -   ⭐
 
@@ -412,11 +413,19 @@ The **worst** things that can happen to publish-subscribe library that is **not*
 
     -   Event inheritance. This should be handled by subscription callbacks **not by** the publish-subscribe system.
 
-    -   Hellish **wildcards-hierarchical addressing-messages matching** for each event. First of all this is impossible with numbers or symbols. And this makes no sense as you can create root channel name anyway. In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others. While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"` event will be kept _private_ or _unimportant_ to others.
+    -   Hellish **wildcards-hierarchical addressing-messages matching** for each event.
+    First of all this is impossible with numbers or symbols.
+    And this makes no sense as you can create root channel name anyway.
+    In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others.
+    While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"`
+    event will be kept *private* or *unimportant* to others.
 
 -   ☠️☠️
 
-    -   Possibility to define **context for each callback**. You have arrow functions for that. You should not save context in one place and take it hostage. Probably you should use global variables instead etc.
+    -   Possibility to define **context for each callback**.
+    You have arrow functions for that.
+    You should not save context in one place and take it hostage.
+    Probably you should use global variables instead etc.
 
     -   **Cancel publish** event distribution for subscribers. This behavior reserved for Observer pattern.
 
@@ -428,18 +437,24 @@ The things you may not like:
 
 -   🔌🔌🔌
 
-    -   No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility. You can transpile library to CommonJS module via Babel with configuration you need.
+    -   No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility.
+    You can transpile library to CommonJS module via Babel with configuration you need.
 
 ## 👀 Discover more
 
--   🔎[Consono](https://consono.js.org)🔎 - The most informative and correct variable inspector for JavaScript on the web.
+-   🔎[Consono](https://consono.js.org)🔎 -
+The most informative and correct variable inspector for JavaScript on the web.
 
--   🌠[OF](https://of.js.org)🌠 - Promise wrapper with some sugar.
+-   🌠[OF](https://of.js.org)🌠 -
+Promise wrapper with some sugar.
 
--   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 - Universal localStorage fallback.
+-   🔩[Local Storage Fallback](https://github.com/r37r0m0d3l/fallback-local-storage)🔩 -
+Universal localStorage fallback.
 
--   🧰[Vicis](https://vicis.js.org)🧰 - Presentation and transformation layer for data output in RESTful APIs.
+-   🧰[Vicis](https://vicis.js.org)🧰 -
+Presentation and transformation layer for data output in RESTful APIs.
 
 Or find useful these tools:
 
--   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 - Neat online JSON sorter.
+-   🧾[JSON Sorter](https://r37r0m0d3l.github.io/json_sort)🧾 -
+Neat online JSON sorter.
