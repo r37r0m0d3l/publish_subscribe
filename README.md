@@ -88,6 +88,14 @@ ECMAScript Modules.
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 ```
 
+UNPKG CDN.
+
+```html
+<script
+  src="https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.js"
+></script>
+```
+
 ## ⌨ Creating Instance
 
 ```js
@@ -173,7 +181,7 @@ const tokenOne = pubsub.subscribe("channel_name_1", synchronousCallback);
 const tokenTwo = pubsub.subscribe("channel_name_2", synchronousCallback);
 ```
 
-No need for token as subscription will expire after first successful call.
+No need for a token as the subscription will expire after a first successful call.
 
 ```js
 pubsub.subscribeOnce("channel_exit", (data, channel, _token) => {});
@@ -230,7 +238,7 @@ pubsub
     });
 ```
 
-Do not wait anything from subscribers - use `publish`.
+Do not wait for anything from subscribers - use `publish`.
 
 ```js
 pubsub.publish("channel_name", { data: "the data" });
@@ -238,7 +246,7 @@ pubsub.publish("channel_name", { data: "the data" });
 
 ## 📪 Unsubscribe
 
-Unsubscribe via token previously retrieved from `subscribe` method.
+Unsubscribe via token previously retrieved from the `subscribe` method.
 
 ```js
 const token = pubsub.subscribe("channel_name", () => {});
@@ -260,7 +268,7 @@ This `callback` function will be removed from **all** subscriptions.
 pubsub.unsubscribeByCallback(callback);
 ```
 
-Unsubscribe based on parameters provided.
+Unsubscribe based on the parameters provided.
 
 ```js
 pubsub.unsubscribe(callbackOrChannelOrToken);
@@ -269,7 +277,7 @@ pubsub.unsubscribe(channel, callback);
 
 ## 🛠️ Utilities
 
-Retrieve callback function via token.
+Retrieve callback function via the token.
 
 ```js
 // token == "zzroUP97lnxL0VUa"
@@ -288,7 +296,7 @@ Has channel.
 pubsub.hasChannel("channel_name");
 ```
 
-Get list of channels. Array of numbers, strings, symbols.
+Get a list of channels. An array of numbers, strings, symbols.
 
 ```js
 pubsub.getChannels();
@@ -322,13 +330,13 @@ Yet another publish-subscribe library? Why this library exists:
 
     -   Get subscription callback function by token and use it somewhere else.
 
-    -   Error swallowing. Publish-subscribe pattern should not broke on some function somewhere deep in code.
+    -   Error swallowing. The publish-subscribe pattern should not break on some function somewhere deep in code.
 
 -   ⭐⭐
 
     -   Possibility to use finite numbers, strings or symbols as channel names.
 
-    -   Subscription functions receive callback token among channel name and published data.
+    -   Subscription functions receive callback token among channel names and published data.
 
     -   Has *subscribeOnce* method.
 
@@ -336,13 +344,13 @@ Yet another publish-subscribe library? Why this library exists:
 
 -   ⭐
 
-    -   Custom logging into console for most actions.
+    -   Custom logging into the console for most actions.
 
     -   TypeScript definitions.
 
-    -   Almost dependency free. This library will work even if the last commit was ten years ago.
+    -   Almost dependency-free. This library will work even if the last commit was ten years ago.
 
-The **worst** things that can happen to publish-subscribe library that is **not** here:
+The **worst** things that can happen to the publish-subscribe library that is **not** here:
 
 -   ☠️☠️☠️
 
@@ -351,8 +359,8 @@ The **worst** things that can happen to publish-subscribe library that is **not*
     -   Event inheritance. This should be handled by subscription callbacks **not by** the publish-subscribe system.
 
     -   Hellish **wildcards-hierarchical addressing-messages matching** for each event.
-    First of all this is impossible with numbers or symbols.
-    And this makes no sense as you can create root channel name anyway.
+    First of all, this is impossible with numbers or symbols.
+    And this makes no sense as you can create the root channel name anyway.
     In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others.
     While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"`
     event will be kept *private* or *unimportant* to others.
@@ -375,7 +383,7 @@ The things you may not like:
 -   🔌🔌🔌
 
     -   No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility.
-    You can transpile library to CommonJS module via Babel with configuration you need.
+    You can transpile the library to the CommonJS module via Babel with the configuration you need.
 
 ## 👀 Discover more
 
