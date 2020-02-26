@@ -18,7 +18,7 @@
     "@babel/plugin-proposal-class-properties": "7.8.3",
     "@babel/preset-env": "7.8.4",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.0.3",
+    "babel-eslint": "10.1.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.0",
     "eslint-plugin-prettier": "3.1.2",
@@ -69,9 +69,10 @@
     "lint": "npx eslint ./src/publish_subscribe.js",
     "lint-md": "remark .",
     "minify": "terser --keep-classnames --keep-fnames --no-minifier --compress --mangle --module --verbose --warn --ecma 8 --verbose --output ./dist/publish_subscribe.js -- ./src/publish_subscribe.js",
-    "test": "jest"
+    "test": "jest",
+    "upgrade": "yarn upgrade-interactive --latest"
   },
   "type": "module",
   "types": "./dist/publish_subscribe.d.ts",
-  "version": "1.2.2"
+  "version": "1.2.3"
 }
