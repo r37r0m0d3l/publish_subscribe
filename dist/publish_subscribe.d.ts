@@ -63,14 +63,33 @@ declare class PublishSubscribe {
    */
   onPublish(callback?: Function): void;
   /**
-   * @name publish
+   * @name onSubscribe
    * @public
    * @param {number|string|symbol} channel
    * @param {*=} data
    * @param {boolean=} cloneData
    * @returns {void}
+   * @throws TypeError
    */
-  public publish(channel: number | string | symbol, data?: any, cloneData?: boolean): void;
+  public onSubscribe(channel, data, cloneData): void;
+  /**
+   * @name onSubscribeClear
+   * @public
+   * @param {number|string|symbol} channel
+   * @returns {void}
+   * @throws TypeError
+   */
+  public onSubscribeClear(channel): void;
+  /**
+   * @name publish
+   * @public
+   * @param {number|string|symbol} channel
+   * @param {*=} data
+   * @param {boolean=} cloneData
+   * @param {boolean=} sticky
+   * @returns {void}
+   */
+  public publish(channel: number | string | symbol, data?: any, cloneData?: boolean, sticky?: boolean): void;
   /**
    * @name publishAsync
    * @public
@@ -78,6 +97,7 @@ declare class PublishSubscribe {
    * @param {*=} data
    * @param {boolean=} resultOnly
    * @param {boolean=} cloneData
+   * @param {boolean=} sticky
    * @returns {Promise}
    */
   public publishAsync(
@@ -85,6 +105,7 @@ declare class PublishSubscribe {
     data?: any,
     resultOnly?: boolean,
     cloneData?: boolean,
+    sticky?: boolean
   ): Promise<Array<any | { channel: number | string | symbol; data: any; token?: string }>>;
   /**
    * @name publishSync
@@ -94,6 +115,7 @@ declare class PublishSubscribe {
    * @param {boolean=} resultOnly
    * @param {boolean=} cloneData
    * @param {function=} callback
+   * @param {boolean=} sticky
    * @returns {array}
    */
   public publishSync(
@@ -102,6 +124,7 @@ declare class PublishSubscribe {
     resultOnly?: boolean,
     cloneData?: boolean,
     callback?: (results: Array<any | { channel: number | string | symbol; data: any; token?: string }>) => any,
+    sticky?: boolean
   ): Array<any | { channel: number | string | symbol; data: any; token?: string }>;
   /**
    * @name setLogging
@@ -168,5 +191,6 @@ declare class PublishSubscribe {
    */
   public unsubscribeByToken(token: string): number;
 }
+
 export default PublishSubscribe;
 export { PublishSubscribe };

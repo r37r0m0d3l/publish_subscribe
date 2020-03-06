@@ -121,6 +121,7 @@
      */
     constructor() {
       this.__channels = new Set();
+      this.__onSubscribe = new Map();
       this.__onPublish = CALLBACK_STUB;
       this.__subscriptions = new Map();
       this.__isValidCallback = function isValidCallback(callback) {
@@ -172,6 +173,7 @@
     dropAll() {
       this.__logging("dropAll");
       this.__channels.clear();
+      this.__onSubscribe.clear();
       this.__subscriptions.clear();
     }
     /**
@@ -262,14 +264,45 @@
       };
     }
     /**
-     * @name publish
+     * @name onSubscribe
      * @public
      * @param {number|string|symbol} channel
      * @param {*=} data
      * @param {boolean=} cloneData
      * @returns {void}
+     * @throws TypeError
      */
-    publish(channel, data, cloneData = true) {
+    onSubscribe(channel, data, cloneData = true) {
+      this.__logging("onSubscribe", { channel, data });
+      if (!this.__isValidChannel(channel)) {
+        throw new TypeError("Channel name should be String, Symbol, Number.");
+      }
+      this.__onSubscribe.set(channel, { cloneData, data });
+    }
+    /**
+     * @name onSubscribeClear
+     * @public
+     * @param {number|string|symbol} channel
+     * @returns {void}
+     * @throws TypeError
+     */
+    onSubscribeClear(channel) {
+      this.__logging("onSubscribeClear", { channel });
+      if (!this.__isValidChannel(channel)) {
+        throw new TypeError("Channel name should be String, Symbol, Number.");
+      }
+      this.__onSubscribe.delete(channel);
+    }
+    /**
+     * @name publish
+     * @public
+     * @param {number|string|symbol} channel
+     * @param {*=} data
+     * @param {boolean=} cloneData
+     * @param {boolean=} sticky
+     * @returns {void}
+     */
+    publish(channel, data, cloneData = true, sticky = false) {
       let getData;
       if (cloneData) {
         getData = () => clone(data);
@@ -278,6 +311,9 @@
       }
       this.__logging("publish", { channel, data: getData() });
       this.__onPublish(channel, getData());
+      if (sticky) {
+        this.onSubscribe(channel, data, cloneData);
+      }
       if (!this.hasChannel(channel)) {
         return;
       }
@@ -371,6 +407,7 @@
      * @param {*=} data
      * @param {boolean=} resultOnly
      * @param {boolean=} cloneData
+     * @param {boolean=} sticky
      * @returns {Promise}
      */
     publishAsync(channel, data, resultOnly = true, cloneData = true) {
@@ -384,6 +421,9 @@
         this.__logging("publishAsync", { channel, data: getData() });
       }
       this.__onPublish(channel, getData());
+      if (sticky) {
+        this.onSubscribe(channel, data, cloneData);
+      }
       if (!this.hasChannel(channel)) {
         return Promise.all([]);
       }
@@ -481,6 +521,7 @@
      * @param {boolean=} resultOnly
      * @param {boolean=} cloneData
      * @param {function=} callback
+     * @param {boolean=} sticky
      * @returns {array}
      */
     publishSync(channel, data, resultOnly = true, cloneData = true, callback = undefined) {
@@ -499,6 +540,9 @@
         curryCallback = (args) => call(callback, [args]);
       } else {
         curryCallback = () => {};
+      }
+      if (sticky) {
+        this.onSubscribe(channel, data, cloneData);
       }
       if (!this.hasChannel(channel)) {
         curryCallback([]);
@@ -592,7 +636,12 @@
         return new TypeError("Callback should be a function.");
       }
       this.__createChannel(channel);
-      return this.__createSubscription(channel, callback, once);
+      const token = this.__createSubscription(channel, callback, once);
+      if (this.__onSubscribe.has(channel)) {
+        let { cloneData, data } = this.__onSubscribe.get(channel);
+        this.publish(channel, data, cloneData);
+      }
+      return token;
     }
     /**
      * @name subscribeOnce

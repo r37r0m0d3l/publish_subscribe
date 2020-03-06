@@ -2,6 +2,12 @@
 
 ---
 
+## 1.3.0 Mar 07, 2020
+
+-   ➕ Added methods `onSubscribe` and `onSubscribeClear`
+
+-   ♻️ Refactored  methods `publish`, `publishAsync`, `publishSync`. New parameter `sticky`.
+
 ## 1.2.3 Feb 26, 2020
 
 -   ⬆️ Dependencies updated
@@ -62,11 +68,11 @@
 
 ## 1.0.6 Jan 25, 2020
 
--   ➕ Add `minify` script
+-   ➕ Added `minify` script
 
 ## 1.0.5 Jan 25, 2020
 
--   ➕ Add minified file `./dist/publish_subscribe.min.mjs` for testing purposes.
+-   ➕ Added minified file `./dist/publish_subscribe.min.mjs` for testing purposes.
 
 ## 1.0.4 Jan 24, 2020
 

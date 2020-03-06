@@ -314,7 +314,9 @@ pubsub.dropAll();
 
 ## 📖 Example
 
-Server
+### WebSocket
+
+#### Server
 
 ```js
 const app = require("express")();
@@ -333,7 +335,7 @@ io.on("connect", function(socket) {
 });
 ```
 
-Client
+#### Client
 
 ```js
 import io from "socket.io-client";
@@ -368,6 +370,10 @@ pubsub.subscribe("websocket/connect", () => {
   pubsub.publish("websocket/event_from_client", { data: "Hello Client" });
 });
 ```
+
+### Redis
+
+
 
 ## 🤷 About
 
