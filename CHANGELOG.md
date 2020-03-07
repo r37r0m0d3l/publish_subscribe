@@ -2,6 +2,10 @@
 
 ---
 
+## 1.3.1 Mar 07, 2020
+
+-   📚 Documentation updated
+
 ## 1.3.0 Mar 07, 2020
 
 -   ➕ Added methods `onSubscribe` and `onSubscribeClear`

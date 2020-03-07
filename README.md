@@ -187,6 +187,18 @@ No need for a token as the subscription will expire after a first successful cal
 pubsub.subscribeOnce("channel_exit", (data, channel, _token) => {});
 ```
 
+Emit publish when the subscription happened.
+
+```js
+pubsub.onSubscribe("channel_name", { message: "This message for every new subscription" });
+```
+
+To disable this.
+
+```js
+pubsub.onSubscribeClear("channel_name");
+```
+
 ## 📨 Publishing Events
 
 Intercept all publishing.
@@ -242,6 +254,16 @@ Do not wait for anything from subscribers - use `publish`.
 
 ```js
 pubsub.publish("channel_name", { data: "the data" });
+```
+
+Create `sticky` data for the channel. Set `sticky` to **TRUE** is the same as calling `onSubscribe` after `publish`, `publishAsync`, `publishSync`.
+
+```js
+const channel = "channel_name";
+const data = { data: "the data" };
+const cloneData = false;
+const sticky = true;
+pubsub.publish(channel, data, cloneData, sticky);
 ```
 
 ## 📪 Unsubscribe
@@ -314,6 +336,14 @@ Clear instance.
 pubsub.dropAll();
 ```
 
+Potential web browser memory leak fix.
+
+```js
+globalThis.addEventListener("beforeunload", function () {
+  pubsub.dropAll();
+});
+```
+
 ## 🤷 About
 
 Yet another publish-subscribe library? Why this library exists:
@@ -377,6 +407,10 @@ The **worst** things that can happen to the publish-subscribe library that is **
 -   ☠️
 
     -   No **order priority** for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
+
+    -   **Sticky events** concept.
+    Events will **stick** in and if any subscriber subscribes for such events after they were published,
+    the subscribers will still receive them upon registration.
 
 The things you may not like:
 

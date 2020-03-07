@@ -334,6 +334,14 @@ Clear instance.
 pubsub.dropAll();
 ```
 
+Potential web browser memory leak fix.
+
+```js
+globalThis.addEventListener("beforeunload", function () {
+  pubsub.dropAll();
+});
+```
+
 ## 📖 Examples
 
 ### WebSocket
@@ -491,6 +499,10 @@ The **worst** things that can happen to the publish-subscribe library that is **
 -   ☠️
 
     -   No **order priority** for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
+
+    -   **Sticky events** concept.
+    Events will **stick** in and if any subscriber subscribes for such events after they were published,
+    the subscribers will still receive them upon registration.
 
 The things you may not like:
 
