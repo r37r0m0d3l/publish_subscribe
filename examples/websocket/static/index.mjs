@@ -1,3 +1,5 @@
+// @todo Work In Progress
+
 import io from "socket.io-client";
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe";
 const socket = io("ws://localhost:3000");
