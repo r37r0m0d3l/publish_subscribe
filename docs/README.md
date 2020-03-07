@@ -185,6 +185,18 @@ No need for a token as the subscription will expire after a first successful cal
 pubsub.subscribeOnce("channel_exit", (data, channel, _token) => {});
 ```
 
+Emit publish when the subscription happened.
+
+```js
+pubsub.onSubscribe("channel_name", { message: "This message for every new subscription" });
+```
+
+To disable this.
+
+```js
+pubsub.onSubscribeClear("channel_name");
+```
+
 ## 📨 Publishing Events
 
 Intercept all publishing.
@@ -240,6 +252,16 @@ Do not wait for anything from subscribers - use `publish`.
 
 ```js
 pubsub.publish("channel_name", { data: "the data" });
+```
+
+Create `sticky` data for the channel. Set `sticky` to **TRUE** is the same as calling `onSubscribe` after `publish`, `publishAsync`, `publishSync`.
+
+```js
+const channel = "channel_name";
+const data = { data: "the data" };
+const cloneData = false;
+const sticky = true;
+pubsub.publish(channel, data, cloneData, sticky);
 ```
 
 ## 📪 Unsubscribe
@@ -312,7 +334,7 @@ Clear instance.
 pubsub.dropAll();
 ```
 
-## 📖 Example
+## 📖 Examples
 
 ### WebSocket
 
@@ -340,10 +362,8 @@ io.on("connect", function(socket) {
 ```js
 import io from "socket.io-client";
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe";
-
 const socket = io("ws://localhost:3000");
 const pubsub = new PublishSubscribe();
-
 pubsub.onPublish((channel, data) => {
   const [root, ...breadcrumbs] = channel.split("/");
   switch (root) {
@@ -352,7 +372,6 @@ pubsub.onPublish((channel, data) => {
       break;
   }
 });
-
 socket.on("connect", function() {
   pubsub.publish("websocket/connect");
 });
@@ -362,7 +381,6 @@ socket.on("close", function() {
 socket.on("event_from_server", (data) => {
   pubsub.publish("websocket/event_from_server", data);
 });
-
 pubsub.subscribe("websocket/event_from_client", () => {
   socket.emit("event_from_client", { data: "Hello Server" });
 });
@@ -373,7 +391,42 @@ pubsub.subscribe("websocket/connect", () => {
 
 ### Redis
 
-
+```js
+const redis = require("redis");
+const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
+const CHANNEL = "main";
+const globalPubSub = new PublishSubscribe();
+const publisher = redis.createClient();
+const subscriber = redis.createClient();
+globalPubSub.subscribe("redis:start", function() {
+  globalPubSub.publish(`redis:publish:${CHANNEL}`, "First Message");
+});
+subscriber.on("subscribe", function() {
+  globalPubSub.publish("redis:start");
+});
+subscriber.on("message", function(channel, message) {
+  let data = message;
+  try {
+    data = JSON.parse(message);
+  } catch (err) {
+    //
+  }
+  globalPubSub.publish(`redis:channel:${CHANNEL}`, data);
+});
+globalPubSub.subscribe(`redis:publish:${CHANNEL}`, function(message, channel) {
+  const redisChannel = channel.split("redis:publish:").pop();
+  let redisMessage = message;
+  if (typeof message !== "string") {
+    redisMessage = JSON.stringify(message);
+  }
+  publisher.publish(redisChannel, redisMessage);
+});
+subscriber.subscribe(CHANNEL);
+globalPubSub.subscribe(`redis:channel:${CHANNEL}`, function(message, channel) {
+  console.dir(message);
+});
+globalPubSub.publish(`redis:publish:${CHANNEL}`, "Third", undefined, true);
+```
 
 ## 🤷 About
 

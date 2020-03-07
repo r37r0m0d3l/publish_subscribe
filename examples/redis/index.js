@@ -65,11 +65,8 @@ globalPubSub.subscribe(`redis:channel:${CHANNEL}`, function(message, channel) {
   console.dir(message);
   console.groupEnd();
 });
-setTimeout(function() {
-  globalPubSub.publish(`redis:publish:${CHANNEL}`, {
-    info: "Third Message"
-  });
-}, 1000);
+
+globalPubSub.publish(`redis:publish:${CHANNEL}`, "Third", undefined, true);
 //#endregion
 
 /*
