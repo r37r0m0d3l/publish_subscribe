@@ -13,12 +13,12 @@ export default {
     {
       file: `./dist/${OUTPUT_NAME}.cjs`,
       format: "cjs",
-      plugins: [autoExternal(), resolve(), commonjs()]
+      plugins: [autoExternal(), resolve(), commonjs()],
     },
     {
       file: `./dist/${OUTPUT_NAME}.mjs`,
       format: "es",
-      plugins: [autoExternal(), resolve(), commonjs()]
+      plugins: [autoExternal(), resolve(), commonjs()],
     },
     {
       file: `./dist/${OUTPUT_NAME}.js`,
@@ -39,10 +39,10 @@ export default {
           sourcemap: true,
           warnings: true,
           keep_classnames: true,
-          keep_fnames: true
-        })
+          keep_fnames: true,
+        }),
       ],
-      sourcemap: true
-    }
-  ]
+      sourcemap: true,
+    },
+  ],
 };
