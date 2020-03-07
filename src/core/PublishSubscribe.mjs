@@ -1,91 +1,14 @@
-const cloneDeep = require("lodash.clonedeep");
-
-const CALLBACK_STUB = () => {};
-const PROTOTYPE_ASYNC = "[object AsyncFunction]";
-const PROTOTYPE_SYNC = "[object Function]";
-const TOKEN_LENGTH = 16;
-
-function call(callback, args) {
-  if (!callback) {
-    return;
-  }
-  switch (getPrototypeName(callback)) {
-    case PROTOTYPE_ASYNC:
-      callback(...args)
-        .then(() => {})
-        .catch(() => {});
-      break;
-    case PROTOTYPE_SYNC:
-      try {
-        callback(...args);
-      } catch (_error) {
-        //
-      }
-      break;
-  }
-}
-
-function clone(value) {
-  if (isPrimitive(value)) {
-    return value;
-  }
-  return cloneDeep(value);
-}
-
-function generateToken() {
-  const random = new Array(TOKEN_LENGTH);
-  for (let index = 0; index < TOKEN_LENGTH; index += 1) {
-    random[index] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 62)];
-  }
-  return random.join("");
-}
-
-function getPrototypeName(value) {
-  return Object.prototype.toString.call(value);
-}
-
-function isObjectEmpty(object) {
-  return objectSize(object) === 0;
-}
-
-/**
- * @name isPrimitive
- * @description Return true on boolean, string, number, BigInt, null, Symbol and undefined
- * @param {*} value
- * @return {boolean}
- */
-function isPrimitive(value) {
-  return Object(value) !== value;
-}
-
-function isSame(variable1, variable2) {
-  return Object.is(variable1, variable2);
-}
-
-function newObject() {
-  return Object.create(null);
-}
-
-function objectKeys(object) {
-  return Object.keys(object);
-}
-
-function objectSize(object) {
-  return objectKeys(object).length;
-}
-
-class Subscription {
-  // callback;
-  // channel;
-  // once;
-  // token;
-  constructor(channel, callback, once = false) {
-    this.callback = callback;
-    this.channel = channel;
-    this.once = once;
-    this.token = generateToken();
-  }
-}
+import PROTOTYPE_ASYNC from "../const/PROTOTYPE_ASYNC";
+import PROTOTYPE_SYNC from "../const/PROTOTYPE_SYNC";
+import Subscription from "../core/Subscription";
+import TOKEN_LENGTH from "../const/TOKEN_LENGTH";
+import call from "../utils/call";
+import clone from "../utils/clone";
+import getPrototypeName from "../utils/getPrototypeName";
+import isObjectEmpty from "../utils/isObjectEmpty";
+import isSame from "../utils/isSame";
+import newObject from "../utils/newObject";
+import objectKeys from "../utils/objectKeys";
 
 /**
  * @class PublishSubscribe
@@ -109,7 +32,7 @@ class PublishSubscribe {
   constructor() {
     this.__channels = new Set();
     this.__onSubscribe = new Map();
-    this.__onPublish = CALLBACK_STUB;
+    this.__onPublish = () => {};
     this.__subscriptions = new Map();
     this.__isValidCallback = function isValidCallback(callback) {
       if (!callback) {
@@ -149,7 +72,7 @@ class PublishSubscribe {
    * @returns {void}
    */
   disableLogging() {
-    this.__logging = CALLBACK_STUB;
+    this.__logging = () => {};
     this.__hasLogging = false;
   }
   /**
@@ -240,7 +163,7 @@ class PublishSubscribe {
    */
   onPublish(callback = undefined) {
     if (callback === undefined) {
-      this.__onPublish = CALLBACK_STUB;
+      this.__onPublish = () => {};
       return;
     }
     if (!this.__isValidCallback(callback)) {
@@ -734,5 +657,4 @@ class PublishSubscribe {
   }
 }
 
-module.exports.default = PublishSubscribe;
-module.exports.PublishSubscribe = PublishSubscribe;
+export default PublishSubscribe;

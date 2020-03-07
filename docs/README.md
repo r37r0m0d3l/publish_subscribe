@@ -73,10 +73,6 @@ npm install @r37r0m0d3l/publish_subscribe
 CommonJS.
 
 ```js
-const PublishSubscribe = require("@r37r0m0d3l/publish_subscribe").default;
-```
-
-```js
 const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
 ```
 
@@ -89,9 +85,9 @@ import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 UNPKG CDN.
 
 ```html
-<script
-  src="https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.js"
-></script>
+<script src="
+https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.min.js
+"></script>
 ```
 
 ## ⌨ Creating Instance
@@ -343,6 +339,8 @@ globalThis.addEventListener("beforeunload", function () {
 ```
 
 ## 📖 Examples
+
+You can look for more examples in the [repository folder](https://github.com/r37r0m0d3l/publish_subscribe/tree/master/examples).
 
 ### WebSocket
 

@@ -2,6 +2,14 @@
 
 ---
 
+## 1.3.2 Mar 07, 2020
+
+-   💥 Remove default exports
+
+-   ♻️ Refactored builds
+
+-   📚 Documentation updated
+
 ## 1.3.1 Mar 07, 2020
 
 -   📚 Documentation updated

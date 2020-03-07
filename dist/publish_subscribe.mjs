@@ -1,9 +1,33 @@
-import cloneDeep from "lodash.clonedeep";
+var PROTOTYPE_ASYNC = "[object AsyncFunction]";
 
-const CALLBACK_STUB = () => {};
-const PROTOTYPE_ASYNC = "[object AsyncFunction]";
-const PROTOTYPE_SYNC = "[object Function]";
-const TOKEN_LENGTH = 16;
+var PROTOTYPE_SYNC = "[object Function]";
+
+var TOKEN_LENGTH = 16;
+
+function generateToken() {
+  const random = new Array(TOKEN_LENGTH);
+  for (let index = 0; index < TOKEN_LENGTH; index += 1) {
+    random[index] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 62)];
+  }
+  return random.join("");
+}
+
+class Subscription {
+  // callback;
+  // channel;
+  // once;
+  // token;
+  constructor(channel, callback, once = false) {
+    this.callback = callback;
+    this.channel = channel;
+    this.once = once;
+    this.token = generateToken();
+  }
+}
+
+function getPrototypeName(value) {
+  return Object.prototype.toString.call(value);
+}
 
 function call(callback, args) {
   if (!callback) {
@@ -25,27 +49,214 @@ function call(callback, args) {
   }
 }
 
-function clone(value) {
-  if (isPrimitive(value)) {
-    return value;
+function clone(val) {
+  switch (typeOf(val)) {
+    case "array":
+      return val.slice();
+    case "object":
+      return Object.assign({}, val);
+    case "date":
+      return new val.constructor(Number(val));
+    case "map":
+      return new Map(val);
+    case "set":
+      return new Set(val);
+    case "buffer":
+      return cloneBuffer(val);
+    case "symbol":
+      return cloneSymbol(val);
+    case "arraybuffer":
+      return cloneArrayBuffer(val);
+    case "float32array":
+    case "float64array":
+    case "int16array":
+    case "int32array":
+    case "int8array":
+    case "uint16array":
+    case "uint32array":
+    case "uint8clampedarray":
+    case "uint8array":
+      return cloneTypedArray(val);
+    case "regexp":
+      return cloneRegExp(val);
+    case "error":
+      return Object.create(val);
+    default: {
+      return val;
+    }
   }
-  return cloneDeep(value);
 }
-
-function generateToken() {
-  const random = new Array(TOKEN_LENGTH);
-  for (let index = 0; index < TOKEN_LENGTH; index += 1) {
-    random[index] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 62)];
+function cloneRegExp(val) {
+  const flags = val.flags !== void 0 ? val.flags : /\w+$/.exec(val) || void 0;
+  const re = new val.constructor(val.source, flags);
+  re.lastIndex = val.lastIndex;
+  return re;
+}
+function cloneArrayBuffer(val) {
+  const res = new val.constructor(val.byteLength);
+  new Uint8Array(res).set(new Uint8Array(val));
+  return res;
+}
+function cloneTypedArray(val) {
+  return new val.constructor(val.buffer, val.byteOffset, val.length);
+}
+function cloneBuffer(val) {
+  const len = val.length;
+  const buf = Buffer.allocUnsafe ? Buffer.allocUnsafe(len) : Buffer.from(len);
+  val.copy(buf);
+  return buf;
+}
+function cloneSymbol(val) {
+  return Symbol.prototype.valueOf ? Object(Symbol.prototype.valueOf.call(val)) : {};
+}
+function isBuffer(obj) {
+  return (
+    obj !== null &&
+    Boolean(obj.constructor) &&
+    typeof obj.constructor.isBuffer === "function" &&
+    obj.constructor.isBuffer(obj)
+  );
+}
+function typeOf(val) {
+  if (typeof val === "undefined") {
+    return "undefined";
   }
-  return random.join("");
+  if (val === null) {
+    return "null";
+  }
+  if (val === true || val === false || val instanceof Boolean) {
+    return "boolean";
+  }
+  if (typeof val === "string" || val instanceof String) {
+    return "string";
+  }
+  if (typeof val === "number" || val instanceof Number) {
+    return "number";
+  }
+  if (typeof val === "function" || val instanceof Function) {
+    return "function";
+  }
+  if (typeof Array.isArray !== "undefined" && Array.isArray(val)) {
+    return "array";
+  }
+  if (val instanceof RegExp) {
+    return "regexp";
+  }
+  if (val instanceof Date) {
+    return "date";
+  }
+  var type = toString.call(val);
+  if (type === "[object RegExp]") {
+    return "regexp";
+  }
+  if (type === "[object Date]") {
+    return "date";
+  }
+  if (type === "[object Arguments]") {
+    return "arguments";
+  }
+  if (type === "[object Error]") {
+    return "error";
+  }
+  if (isBuffer(val)) {
+    return "buffer";
+  }
+  if (type === "[object Set]") {
+    return "set";
+  }
+  if (type === "[object WeakSet]") {
+    return "weakset";
+  }
+  if (type === "[object Map]") {
+    return "map";
+  }
+  if (type === "[object WeakMap]") {
+    return "weakmap";
+  }
+  if (type === "[object Symbol]") {
+    return "symbol";
+  }
+  if (type === "[object Int8Array]") {
+    return "int8array";
+  }
+  if (type === "[object Uint8Array]") {
+    return "uint8array";
+  }
+  if (type === "[object Uint8ClampedArray]") {
+    return "uint8clampedarray";
+  }
+  if (type === "[object Int16Array]") {
+    return "int16array";
+  }
+  if (type === "[object Uint16Array]") {
+    return "uint16array";
+  }
+  if (type === "[object Int32Array]") {
+    return "int32array";
+  }
+  if (type === "[object Uint32Array]") {
+    return "uint32array";
+  }
+  if (type === "[object Float32Array]") {
+    return "float32array";
+  }
+  if (type === "[object Float64Array]") {
+    return "float64array";
+  }
+  return "object";
 }
-
-function getPrototypeName(value) {
-  return Object.prototype.toString.call(value);
+function isObject(obj) {
+  return typeof obj === "object" && obj !== null;
 }
-
-function isObjectEmpty(object) {
-  return objectSize(object) === 0;
+function isObjectObject(obj) {
+  return isObject(obj) === true && Object.prototype.toString.call(obj) === "[object Object]";
+}
+function isPlainObject(obj) {
+  let ctor;
+  let prototype;
+  if (isObjectObject(obj) === false) {
+    return false;
+  }
+  ctor = obj.constructor;
+  if (typeof ctor !== "function") {
+    return false;
+  }
+  prototype = ctor.prototype;
+  if (isObjectObject(prototype) === false) {
+    return false;
+  }
+  return prototype.hasOwnProperty("isPrototypeOf") !== false;
+}
+function cloneDeep(val, instanceClone) {
+  switch (typeOf(val)) {
+    case "object":
+      return cloneObjectDeep(val, instanceClone);
+    case "array":
+      return cloneArrayDeep(val, instanceClone);
+    default: {
+      return clone(val);
+    }
+  }
+}
+function cloneObjectDeep(val, instanceClone) {
+  if (typeof instanceClone === "function") {
+    return instanceClone(val);
+  }
+  if (instanceClone || isPlainObject(val)) {
+    const res = new val.constructor();
+    for (let key in val) {
+      res[key] = cloneDeep(val[key], instanceClone);
+    }
+    return res;
+  }
+  return val;
+}
+function cloneArrayDeep(val, instanceClone) {
+  const res = new val.constructor(val.length);
+  for (let index = 0; index < val.length; index++) {
+    res[index] = cloneDeep(val[index], instanceClone);
+  }
+  return res;
 }
 
 /**
@@ -58,12 +269,11 @@ function isPrimitive(value) {
   return Object(value) !== value;
 }
 
-function isSame(variable1, variable2) {
-  return Object.is(variable1, variable2);
-}
-
-function newObject() {
-  return Object.create(null);
+function clone$1(value) {
+  if (isPrimitive(value)) {
+    return value;
+  }
+  return cloneDeep(value);
 }
 
 function objectKeys(object) {
@@ -74,17 +284,16 @@ function objectSize(object) {
   return objectKeys(object).length;
 }
 
-class Subscription {
-  // callback;
-  // channel;
-  // once;
-  // token;
-  constructor(channel, callback, once = false) {
-    this.callback = callback;
-    this.channel = channel;
-    this.once = once;
-    this.token = generateToken();
-  }
+function isObjectEmpty(object) {
+  return objectSize(object) === 0;
+}
+
+function isSame(variable1, variable2) {
+  return Object.is(variable1, variable2);
+}
+
+function newObject() {
+  return Object.create(null);
 }
 
 /**
@@ -109,7 +318,7 @@ class PublishSubscribe {
   constructor() {
     this.__channels = new Set();
     this.__onSubscribe = new Map();
-    this.__onPublish = CALLBACK_STUB;
+    this.__onPublish = () => {};
     this.__subscriptions = new Map();
     this.__isValidCallback = function isValidCallback(callback) {
       if (!callback) {
@@ -149,7 +358,7 @@ class PublishSubscribe {
    * @returns {void}
    */
   disableLogging() {
-    this.__logging = CALLBACK_STUB;
+    this.__logging = () => {};
     this.__hasLogging = false;
   }
   /**
@@ -240,7 +449,7 @@ class PublishSubscribe {
    */
   onPublish(callback = undefined) {
     if (callback === undefined) {
-      this.__onPublish = CALLBACK_STUB;
+      this.__onPublish = () => {};
       return;
     }
     if (!this.__isValidCallback(callback)) {
@@ -292,7 +501,7 @@ class PublishSubscribe {
   publish(channel, data, cloneData = true, sticky = false) {
     let getData;
     if (cloneData) {
-      getData = () => clone(data);
+      getData = () => clone$1(data);
     } else {
       getData = () => data;
     }
@@ -328,7 +537,7 @@ class PublishSubscribe {
                   if (this.__hasLogging) {
                     this.__logging("publish -> receive", {
                       channel,
-                      result: clone(promiseResult),
+                      result: clone$1(promiseResult),
                       token,
                     });
                   }
@@ -373,7 +582,7 @@ class PublishSubscribe {
               if (this.__hasLogging) {
                 this.__logging("publish -> receive", {
                   channel,
-                  result: clone(resultForPromise),
+                  result: clone$1(resultForPromise),
                   token,
                 });
               }
@@ -400,7 +609,7 @@ class PublishSubscribe {
   publishAsync(channel, data, resultOnly = true, cloneData = true, sticky = false) {
     let getData;
     if (cloneData) {
-      getData = () => clone(data);
+      getData = () => clone$1(data);
     } else {
       getData = () => data;
     }
@@ -438,7 +647,7 @@ class PublishSubscribe {
                   if (this.__hasLogging) {
                     this.__logging("publishAsync -> receive", {
                       channel,
-                      result: clone(promiseResult),
+                      result: clone$1(promiseResult),
                       token,
                     });
                   }
@@ -483,7 +692,7 @@ class PublishSubscribe {
               if (this.__hasLogging) {
                 this.__logging("publishAsync -> receive", {
                   channel,
-                  result: clone(resultForPromise),
+                  result: clone$1(resultForPromise),
                   token,
                 });
               }
@@ -514,7 +723,7 @@ class PublishSubscribe {
   publishSync(channel, data, resultOnly = true, cloneData = true, callback = undefined, sticky = false) {
     let getData;
     if (cloneData) {
-      getData = () => clone(data);
+      getData = () => clone$1(data);
     } else {
       getData = () => data;
     }
@@ -560,7 +769,7 @@ class PublishSubscribe {
       if (this.__hasLogging) {
         this.__logging("publishSync -> receive", {
           channel,
-          result: clone(result),
+          result: clone$1(result),
           token,
         });
       }
@@ -734,5 +943,4 @@ class PublishSubscribe {
   }
 }
 
-export default PublishSubscribe;
 export { PublishSubscribe };

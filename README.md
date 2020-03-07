@@ -75,10 +75,6 @@ npm install @r37r0m0d3l/publish_subscribe
 CommonJS.
 
 ```js
-const PublishSubscribe = require("@r37r0m0d3l/publish_subscribe").default;
-```
-
-```js
 const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
 ```
 
@@ -91,9 +87,9 @@ import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 UNPKG CDN.
 
 ```html
-<script
-  src="https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.js"
-></script>
+<script src="
+https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.min.js
+"></script>
 ```
 
 ## ⌨ Creating Instance
@@ -410,6 +406,7 @@ The **worst** things that can happen to the publish-subscribe library that is **
 
     -   **Sticky events** concept.
     Events will **stick** in and if any subscriber subscribes for such events after they were published,
+    the subscribers will still receive them upon registration.
     the subscribers will still receive them upon registration.
 
 The things you may not like:

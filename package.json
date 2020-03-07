@@ -9,14 +9,14 @@
       "name": "Anton Trofimenko"
     }
   ],
-  "dependencies": {
-    "lodash.clonedeep": "latest"
-  },
+  "dependencies": {},
   "description": "Message bus implementation via publish / subscribe pattern",
   "devDependencies": {
     "@babel/core": "7.8.7",
     "@babel/plugin-proposal-class-properties": "7.8.3",
     "@babel/preset-env": "7.8.7",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "7.1.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "eslint": "6.8.0",
@@ -28,7 +28,10 @@
     "remark-lint": "6.0.5",
     "remark-preset-lint-consistent": "2.0.3",
     "remark-preset-lint-markdown-style-guide": "2.1.3",
-    "remark-preset-lint-recommended": "3.0.3"
+    "remark-preset-lint-recommended": "3.0.3",
+    "rollup": "2.0.2",
+    "rollup-plugin-auto-external": "2.0.0",
+    "rollup-plugin-terser": "5.2.0"
   },
   "exports": {
     ".": "./dist/publish_subscribe.cjs",
@@ -39,6 +42,8 @@
     "dist/publish_subscribe.cjs",
     "dist/publish_subscribe.d.ts",
     "dist/publish_subscribe.js",
+    "dist/publish_subscribe.min.js",
+    "dist/publish_subscribe.min.js.map",
     "dist/publish_subscribe.mjs"
   ],
   "homepage": "https://publish-subscribe.js.org",
@@ -65,14 +70,14 @@
     "url": "git+https://github.com/r37r0m0d3l/publish_subscribe.git"
   },
   "scripts": {
+    "build": "rollup --config rollup.config.js",
     "docs-serve": "docsify serve docs",
-    "lint": "npx eslint ./src/publish_subscribe.js",
+    "lint": "npx eslint ./src/**/*.mjs",
     "lint-md": "remark .",
-    "minify": "terser --keep-classnames --keep-fnames --no-minifier --compress --mangle --module --verbose --warn --ecma 8 --verbose --output ./dist/publish_subscribe.js -- ./src/publish_subscribe.js",
     "test": "jest",
     "upgrade": "yarn upgrade-interactive --latest"
   },
   "type": "module",
   "types": "./dist/publish_subscribe.d.ts",
-  "version": "1.3.1"
+  "version": "1.3.2"
 }

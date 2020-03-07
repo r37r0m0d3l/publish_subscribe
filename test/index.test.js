@@ -1,8 +1,9 @@
-const PublishSubscribe = require("../dist/publish_subscribe.cjs").default;
+const { PublishSubscribe } = require("../dist/publish_subscribe.cjs");
 
 describe("calling and printing", () => {
   it("should not crash on call", () => {
     const pubsub = new PublishSubscribe();
-    expect(pubsub.hasChannel("dummy")).toBe(false);
+    pubsub.subscribe("dummy", () => {});
+    expect(pubsub.hasChannel("dummy")).toBe(true);
   });
 });
