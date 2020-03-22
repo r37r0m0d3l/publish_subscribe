@@ -2,6 +2,10 @@
 
 ---
 
+## 1.3.4 Mar 22, 2020
+
+-   ⬆️ Dependencies updated
+
 ## 1.3.2 Mar 07, 2020
 
 -   💥 Remove default exports
