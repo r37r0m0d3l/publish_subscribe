@@ -7,16 +7,8 @@ JavaScript implementation of the Publish-Subscribe pattern.
 [![NPM Version](https://img.shields.io/npm/v/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
 [![NPM Downloads](https://img.shields.io/npm/dt/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
 [![Build Status](https://travis-ci.org/r37r0m0d3l/publish_subscribe.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/publish_subscribe)
-[![Issues](https://img.shields.io/github/issues-raw/r37r0m0d3l/publish_subscribe.svg?maxAge=25000)](https://github.com/r37r0m0d3l/publish_subscribe/issues)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/r37r0m0d3l/publish_subscribe/badge.svg?targetFile=package.json)](https://snyk.io/test/github/r37r0m0d3l/publish_subscribe?targetFile=package.json)
-[![Dependency Status](https://david-dm.org/r37r0m0d3l/publish_subscribe.svg)](https://david-dm.org/r37r0m0d3l/publish_subscribe)
-[![devDependencies Status](https://david-dm.org/r37r0m0d3l/publish_subscribe/dev-status.svg)](https://david-dm.org/r37r0m0d3l/publish_subscribe?type=dev)
-
 [![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/publish_subscribe.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![GitHub watchers](https://img.shields.io/github/watchers/r37r0m0d3l/publish_subscribe.svg?style=social&label=Watch)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![GitHub forks](https://img.shields.io/github/forks/r37r0m0d3l/publish_subscribe.svg?style=social&label=Fork)]()
+[![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l)
 
 ---
 
