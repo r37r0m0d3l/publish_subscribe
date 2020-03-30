@@ -79,9 +79,9 @@ import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
 UNPKG CDN.
 
 ```html
-<script src="
-https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.min.js
-"></script>
+<script
+  src="https://unpkg.com/@r37r0m0d3l/publish_subscribe"
+></script>
 ```
 
 ## ⌨ Creating Instance

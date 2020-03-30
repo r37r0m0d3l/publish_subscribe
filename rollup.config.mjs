@@ -1,7 +1,8 @@
-import { terser } from "rollup-plugin-terser";
+import babel from "rollup-plugin-babel";
+import autoExternal from "rollup-plugin-auto-external";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import autoExternal from "rollup-plugin-auto-external";
+import rollupPluginTerser from "rollup-plugin-terser";
 
 const INPUT_NAME = "index.mjs";
 const OUTPUT_NAME = "publish_subscribe";
@@ -13,36 +14,40 @@ export default {
     {
       file: `./dist/${OUTPUT_NAME}.cjs`,
       format: "cjs",
-      plugins: [autoExternal(), resolve(), commonjs()],
+      sourcemap: true,
     },
     {
       file: `./dist/${OUTPUT_NAME}.mjs`,
       format: "es",
-      plugins: [autoExternal(), resolve(), commonjs()],
+      sourcemap: true,
     },
     {
       file: `./dist/${OUTPUT_NAME}.js`,
       format: "umd",
       name: UMD_NAME,
-      plugins: [autoExternal(), resolve(), commonjs()],
-      sourcemap: false,
+      sourcemap: true,
     },
     {
       file: `./dist/${OUTPUT_NAME}.min.js`,
       format: "umd",
       name: UMD_NAME,
-      plugins: [
-        autoExternal(),
-        resolve(),
-        commonjs(),
-        terser({
-          sourcemap: true,
-          warnings: true,
-          keep_classnames: true,
-          keep_fnames: true,
-        }),
-      ],
+
       sourcemap: true,
     },
+  ],
+  plugins: [
+    babel({ babelrc: true }),
+    autoExternal(),
+    resolve(),
+    commonjs(),
+    rollupPluginTerser.terser({
+      output: {
+        comments: false,
+      },
+      sourcemap: true,
+      warnings: true,
+      keep_classnames: true,
+      keep_fnames: true,
+    }),
   ],
 };
