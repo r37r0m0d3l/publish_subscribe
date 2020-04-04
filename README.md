@@ -1,14 +1,14 @@
 # Publish Subscribe
 
-JavaScript implementation of the Publish-Subscribe pattern.
+JavaScript's implementation of the Publish-Subscribe pattern.
 
 [🗎 Publish Subscribe Documentation 🗎](https://publish-subscribe.js.org)
 
-[![NPM Version](https://img.shields.io/npm/v/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
-[![NPM Downloads](https://img.shields.io/npm/dt/@r37r0m0d3l/publish_subscribe.svg?style=flat)]()
-[![Build Status](https://travis-ci.org/r37r0m0d3l/publish_subscribe.svg?branch=master)](https://travis-ci.org/r37r0m0d3l/publish_subscribe)
-[![GitHub stars](https://img.shields.io/github/stars/r37r0m0d3l/publish_subscribe.svg?style=social&label=Star)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![GitHub followers](https://img.shields.io/github/followers/r37r0m0d3l.svg?style=social&label=Follow)](https://github.com/r37r0m0d3l)
+[![npm](https://badgen.net/npm/v/@r37r0m0d3l/publish_subscribe?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/@r37r0m0d3l/publish_subscribe)
+[![downloads](https://badgen.net/npm/dt/@r37r0m0d3l/publish_subscribe?&icon=terminal&label=downloads&color=009688)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![stars](https://badgen.net/github/stars/r37r0m0d3l/publish_subscribe?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![types](https://badgen.net/npm/types/@r37r0m0d3l/publish_subscribe?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![build](https://badgen.net/travis/r37r0m0d3l/publish_subscribe?&icon=travis&label=build)](https://github.com/r37r0m0d3l/publish_subscribe)
 
 ---
 
