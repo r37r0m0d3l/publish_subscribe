@@ -4,12 +4,12 @@ JavaScript's implementation of the Publish-Subscribe pattern.
 
 [🗎 Publish Subscribe Documentation 🗎](https://publish-subscribe.js.org)
 
-[![npm](https://badgen.net/npm/v/@r37r0m0d3l/publish_subscribe?&icon=npm&label=npm&color=DD3636)](https://www.npmjs.com/package/@r37r0m0d3l/publish_subscribe)
-[![downloads](https://badgen.net/npm/dt/@r37r0m0d3l/publish_subscribe?&icon=terminal&label=downloads&color=009688)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![stars](https://badgen.net/github/stars/r37r0m0d3l/publish_subscribe?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![types](https://badgen.net/npm/types/@r37r0m0d3l/publish_subscribe?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![build](https://badgen.net/travis/r37r0m0d3l/publish_subscribe?&icon=travis&label=build)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/publish_subscribe?&icon=lgtm&label=lgtm:js/ts&color=00C853)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![npm](https://badgen.net/npm/v/@r37r0m0d3l/publish_subscribe?&icon=npm&label=npm&color=DD3636&v=1.4.0)](https://www.npmjs.com/package/@r37r0m0d3l/publish_subscribe)
+[![downloads](https://badgen.net/npm/dt/@r37r0m0d3l/publish_subscribe?&icon=terminal&label=downloads&color=009688&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![stars](https://badgen.net/github/stars/r37r0m0d3l/publish_subscribe?&icon=github&label=stars&color=ffcc33&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![types](https://badgen.net/npm/types/@r37r0m0d3l/publish_subscribe?&icon=typescript&label=types&color=1E90FF&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![build](https://badgen.net/travis/r37r0m0d3l/publish_subscribe?&icon=travis&label=build&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/publish_subscribe?&icon=lgtm&label=lgtm:js/ts&color=00C853&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
 
 ---
 
