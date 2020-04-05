@@ -6,6 +6,7 @@
   "dependencies": {
     "@r37r0m0d3l/publish_subscribe": "latest",
     "express": "latest",
+    "express-rate-limit": "latest",
     "socket.io": "latest"
   }
 }

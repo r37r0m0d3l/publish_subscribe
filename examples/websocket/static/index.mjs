@@ -8,7 +8,7 @@ pubsub.onPublish((channel, data) => {
   const [root, ...breadcrumbs] = channel.split("/");
   switch (root) {
     case "websocket":
-      console.log({ channel, data });
+      console.log({ channel, data, breadcrumbs });
       break;
   }
 });

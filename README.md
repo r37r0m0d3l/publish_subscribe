@@ -9,6 +9,7 @@ JavaScript's implementation of the Publish-Subscribe pattern.
 [![stars](https://badgen.net/github/stars/r37r0m0d3l/publish_subscribe?&icon=github&label=stars&color=ffcc33)](https://github.com/r37r0m0d3l/publish_subscribe)
 [![types](https://badgen.net/npm/types/@r37r0m0d3l/publish_subscribe?&icon=typescript&label=types&color=1E90FF)](https://github.com/r37r0m0d3l/publish_subscribe)
 [![build](https://badgen.net/travis/r37r0m0d3l/publish_subscribe?&icon=travis&label=build)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/publish_subscribe?&icon=lgtm&label=lgtm:js/ts&color=00C853)](https://github.com/r37r0m0d3l/publish_subscribe)
 
 ---
 
@@ -20,7 +21,7 @@ JavaScript's implementation of the Publish-Subscribe pattern.
 ## 🏃💨 Tl;dr
 
 ```typescript
-import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
+import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe";
 //
 const pubsub: PublishSubscribe = new PublishSubscribe();
 type IChannel = number|string|symbol;
@@ -72,8 +73,8 @@ const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
 
 ECMAScript Modules.
 
-```typescript
-import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe/es";
+```js
+import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe";
 ```
 
 UNPKG CDN.
