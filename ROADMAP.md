@@ -1,0 +1,1 @@
+-   Use RegEx for event matching when subscribing to events.
