@@ -2,7 +2,7 @@ import babel from "rollup-plugin-babel";
 import autoExternal from "rollup-plugin-auto-external";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import rollupPluginTerser from "rollup-plugin-terser";
+import { terser } from "rollup-plugin-terser";
 
 const INPUT_NAME = "index.mjs";
 const OUTPUT_NAME = "publish_subscribe";
@@ -38,16 +38,15 @@ export default {
   plugins: [
     babel({ babelrc: true }),
     autoExternal(),
-    resolve(),
+    resolve.nodeResolve(),
     commonjs(),
-    rollupPluginTerser.terser({
+    terser({
+      keep_classnames: true,
+      keep_fnames: true,
       output: {
         comments: false,
       },
-      sourcemap: true,
       warnings: true,
-      keep_classnames: true,
-      keep_fnames: true,
     }),
   ],
 };

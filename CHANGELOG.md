@@ -2,6 +2,10 @@
 
 ---
 
+## 1.4.2
+
+-   ♻️ Include map files into npm package
+
 ## 1.4.1
 
 -   ⬆️ Dependencies updated
