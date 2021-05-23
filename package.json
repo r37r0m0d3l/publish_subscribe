@@ -21,7 +21,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "eslint": "7.26.0",
-    "eslint-config-prettier": "6.11.0",
+    "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "jest": "26.0.1",
     "npm-check": "5.9.2",
