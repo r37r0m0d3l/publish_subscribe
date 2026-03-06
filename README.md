@@ -14,11 +14,6 @@ JavaScript's implementation of the Publish-Subscribe pattern.
 
 ---
 
-*If you use this project don't forget to give a
-⭐ [star](https://github.com/r37r0m0d3l/publish_subscribe) ⭐ to it on GitHub!*
-
----
-
 ## 🏃💨 Tl;dr
 
 ```typescript
@@ -64,12 +59,6 @@ Installation.
 
 ```bash
 npm install @r37r0m0d3l/publish_subscribe
-```
-
-CommonJS.
-
-```js
-const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
 ```
 
 ECMAScript Modules.
@@ -409,12 +398,6 @@ The things you may not like:
 
     -   No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility.
     You can transpile the library to the CommonJS module via Babel with the configuration you need.
-
-## 👀 Discover more
-
-[My other projects](https://r37r0m0d3l.icu/open_source_map)
-
-<img src="https://raw.githubusercontent.com/r37r0m0d3l/r37r0m0d3l/master/osmap.svg?sanitize=true" width="960" height="520" style="display:block;height:auto;margin-left:auto;margin-right:auto;min-height:520px;min-width:960px;width:100%;">
 
 <!-- Badges -->
 
