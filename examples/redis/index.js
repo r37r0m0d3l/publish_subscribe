@@ -1,12 +1,18 @@
-//#region File Where You creating Instance
-const redis = require("redis");
-const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
+//#region File Where You're creating Instance
+import redis from "redis";
+
+import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe";
 
 const CHANNEL = "main";
 
 const globalPubSub = new PublishSubscribe();
 const publisher = redis.createClient();
 const subscriber = redis.createClient();
+
+await Promise.all([
+  publisher.connect(),
+  subscriber.connect()
+]);
 
 globalPubSub.subscribe("redis:start", function() {
   console.log("#2 Redis Publish Subscribe started!");
@@ -17,24 +23,28 @@ globalPubSub.subscribe("redis:start", function() {
   });
   setTimeout(function() {
     globalPubSub.publish(`redis:quit`);
-  }, 2000);
+  }, 2_000);
   //#endregion
 });
 
-globalPubSub.subscribe(`redis:quit`, (message, channel) => {
+globalPubSub.subscribe(`redis:quit`, async (message, channel) => {
   console.group("#4 Redis is about to quit!");
-  subscriber.unsubscribe();
-  subscriber.quit();
-  publisher.quit();
+  await subscriber.unsubscribe();
+  await subscriber.quit();
+  await publisher.quit();
   process.exit(0);
 });
 
-subscriber.on("subscribe", function() {
-  console.log("#1 Redis Subscribed!");
-  globalPubSub.publish("redis:start");
+globalPubSub.subscribe(`redis:publish:${CHANNEL}`, async (message, channel) => {
+  const redisChannel = channel.split("redis:publish:").pop();
+  let redisMessage = message;
+  if (typeof message !== "string") {
+    redisMessage = JSON.stringify(message);
+  }
+  await publisher.publish(redisChannel, redisMessage);
 });
 
-subscriber.on("message", function(channel, message) {
+await subscriber.subscribe(CHANNEL, function(message, channel) {
   let data = message;
   try {
     data = JSON.parse(message);
@@ -44,16 +54,9 @@ subscriber.on("message", function(channel, message) {
   globalPubSub.publish(`redis:channel:${CHANNEL}`, data);
 });
 
-globalPubSub.subscribe(`redis:publish:${CHANNEL}`, (message, channel) => {
-  const redisChannel = channel.split("redis:publish:").pop();
-  let redisMessage = message;
-  if (typeof message !== "string") {
-    redisMessage = JSON.stringify(message);
-  }
-  publisher.publish(redisChannel, redisMessage);
-});
+console.log("#1 Redis Subscribed!");
+globalPubSub.publish("redis:start");
 
-subscriber.subscribe(CHANNEL);
 //#endregion
 
 //#region Any Other File in your Project

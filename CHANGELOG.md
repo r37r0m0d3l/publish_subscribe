@@ -1,139 +1,149 @@
 # Changelog
 
----
+## 2.0.0
+
+#### ⚠️ BREAKING CHANGES
+
+* Compared to version 1.x.x – this package is now a pure ESM package.
+
+* Pure ESM Migration: This package is now ESM-only. CJS (CommonJS) files support has been dropped.
+
+* Package now is ESM-only - type `module`.
+
+* Minimal Node version: `22.18.0` - you will be able to `require()` ESM in it **without transpilation**.
 
 ## 1.4.2
 
--   ♻️ Include map files into npm package
+- ♻️ Include map files in the npm package
 
 ## 1.4.1
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.4.0
 
--   ⚡️ Change default export format
+- ⚡️ Change default export format
 
 ## 1.3.7
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.3.6
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.3.5
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.3.4
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.3.2
 
--   💥 Remove default exports
+- 💥 Remove default exports
 
--   ♻️ Refactored builds
+- ♻️ Refactored builds
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.3.1
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.3.0
 
--   ➕ Added methods `onSubscribe` and `onSubscribeClear`
+- ➕ Added methods `onSubscribe` and `onSubscribeClear`
 
--   ♻️ Refactored  methods `publish`, `publishAsync`, `publishSync`. New parameter `sticky`.
+- ♻️ Refactored methods `publish`, `publishAsync`, `publishSync`. New parameter `sticky`.
 
 ## 1.2.3
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.2.2
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.2.1
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.2.0
 
--   ♻️ Remove all private fields for better debugging
+- ♻️ Remove all private fields for better debugging
 
 ## 1.1.8
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.1.7
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.1.6
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.1.5
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.1.4
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.1.3
 
--   ⬆️ Dependencies updated
+- ⬆️ Dependencies updated
 
 ## 1.1.2
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.1.1
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.1.0
 
--   🚚️ Bundle AMD, UMD, CommonJS into `./dist/publish_subscribe.js`
+- 🚚️ Bundle AMD, UMD, CommonJS into `./dist/publish_subscribe.js`
 
 ## 1.0.7
 
--   🎨 Bundle `lodash.clonedeep` into `./dist/publish_subscribe.min.mjs`
+- 🎨 Bundle `lodash.clonedeep` into `./dist/publish_subscribe.min.mjs`
 
 ## 1.0.6
 
--   ➕ Added `minify` script
+- ➕ Added `minify` script
 
 ## 1.0.5
 
--   ➕ Added minified file `./dist/publish_subscribe.min.mjs` for testing purposes.
+- ➕ Added minified file `./dist/publish_subscribe.min.mjs` for testing purposes.
 
 ## 1.0.4
 
--   ♻️ Refactor `getChannels` method.
-Now channels defined as `Symbol` are private.
-However you can still check it using `hasChannel` method.
+- ♻️ Refactor `getChannels` method.
+  Now channels defined as `Symbol` are private.
+  However, you can still check it using `hasChannel` method.
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.0.3
 
--   🔨 Fix `publish_subscribe.d.ts`
+- 🔨 Fix `publish_subscribe.d.ts`
 
 ## 1.0.2
 
--   📚 Documentation updated
+- 📚 Documentation updated
 
 ## 1.0.1
 
--   🎉 Rename project
+- 🎉 Rename project
 
 ## 1.0.0
 
--   🎉 Initial release
+- 🎉 Initial release

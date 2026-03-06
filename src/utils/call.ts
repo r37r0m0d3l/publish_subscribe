@@ -1,6 +1,6 @@
-import PROTOTYPE_ASYNC from "../const/PROTOTYPE_ASYNC";
-import PROTOTYPE_SYNC from "../const/PROTOTYPE_SYNC";
-import getPrototypeName from "./getPrototypeName";
+import PROTOTYPE_ASYNC from "../const/PROTOTYPE_ASYNC.js";
+import PROTOTYPE_SYNC from "../const/PROTOTYPE_SYNC.js";
+import getPrototypeName from "./getPrototypeName.js";
 
 export default function call(callback, args) {
   if (!callback) {

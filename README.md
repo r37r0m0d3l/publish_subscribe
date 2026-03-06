@@ -4,12 +4,13 @@ JavaScript's implementation of the Publish-Subscribe pattern.
 
 [🗎 Publish Subscribe Documentation 🗎](https://publish-subscribe.js.org)
 
-[![npm](https://badgen.net/npm/v/@r37r0m0d3l/publish_subscribe?&icon=npm&label=npm&color=DD3636&v=1.4.0)](https://www.npmjs.com/package/@r37r0m0d3l/publish_subscribe)
-[![downloads](https://badgen.net/npm/dt/@r37r0m0d3l/publish_subscribe?&icon=terminal&label=downloads&color=009688&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![stars](https://badgen.net/github/stars/r37r0m0d3l/publish_subscribe?&icon=github&label=stars&color=ffcc33&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![types](https://badgen.net/npm/types/@r37r0m0d3l/publish_subscribe?&icon=typescript&label=types&color=1E90FF&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![build](https://badgen.net/travis/r37r0m0d3l/publish_subscribe?&icon=travis&label=build&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/publish_subscribe?&icon=lgtm&label=lgtm:js/ts&color=00C853&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
+[![NPM Version][npm-version-img]][npm-version-url]
+[![NPM Downloads][npm-downloads-img]][npm-downloads-url]
+[![TypeScript Typings][ts-img]][ts-url]
+
+[//]: # ([![stars]&#40;https://badgen.net/github/stars/r37r0m0d3l/publish_subscribe?&icon=github&label=stars&color=ffcc33&v=1.4.0&#41;]&#40;https://github.com/r37r0m0d3l/publish_subscribe&#41;)
+[//]: # ([![build]&#40;https://badgen.net/travis/r37r0m0d3l/publish_subscribe?&icon=travis&label=build&v=1.4.0&#41;]&#40;https://github.com/r37r0m0d3l/publish_subscribe&#41;)
+[//]: # ([![lgtm]&#40;https://badgen.net/lgtm/grade/g/r37r0m0d3l/publish_subscribe?&icon=lgtm&label=lgtm:js/ts&color=00C853&v=1.4.0&#41;]&#40;https://github.com/r37r0m0d3l/publish_subscribe&#41;)
 
 ---
 
@@ -414,3 +415,12 @@ The things you may not like:
 [My other projects](https://r37r0m0d3l.icu/open_source_map)
 
 <img src="https://raw.githubusercontent.com/r37r0m0d3l/r37r0m0d3l/master/osmap.svg?sanitize=true" width="960" height="520" style="display:block;height:auto;margin-left:auto;margin-right:auto;min-height:520px;min-width:960px;width:100%;">
+
+<!-- Badges -->
+
+[npm-downloads-img]: https://badgen.net/npm/dt/translit%2Ded?&icon=terminal&label=downloads&color=009688
+[npm-downloads-url]: https://npmjs.com/package/translit-ed
+[npm-version-img]: https://badgen.net/npm/v/translit-ed?&icon=npm&label=npm&color=DD3636
+[npm-version-url]: https://npmjs.com/package/translit-ed
+[ts-img]: https://badgen.net/npm/types/translit-ed?&icon=typescript&label=types&color=1E90FF
+[ts-url]: https://github.com/r37r0m0d3l/translit-ed/blob/master/dist/translit-ed.d.ts

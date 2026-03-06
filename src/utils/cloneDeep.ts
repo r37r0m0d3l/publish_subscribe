@@ -1,5 +1,5 @@
 function clone(val) {
-  switch (typeOf(val)) {
+  switch (typeOf(val) as string) {
     case "array":
       return val.slice();
     case "object":
@@ -51,7 +51,11 @@ function cloneTypedArray(val) {
 }
 function cloneBuffer(val) {
   const len = val.length;
-  const buf = Buffer.allocUnsafe ? Buffer.allocUnsafe(len) : Buffer.from(len);
+  const buf = globalThis.Buffer?.allocUnsafe
+    ? globalThis.Buffer.allocUnsafe(len)
+    : globalThis.Buffer?.from
+      ? globalThis.Buffer.from(len)
+      : new Uint8Array(len);
   val.copy(buf);
   return buf;
 }
@@ -94,7 +98,7 @@ function typeOf(val) {
   if (val instanceof Date) {
     return "date";
   }
-  var type = toString.call(val);
+  var type = Object.prototype.toString.call(val);
   if (type === "[object RegExp]") {
     return "regexp";
   }
@@ -177,7 +181,7 @@ function isPlainObject(obj) {
   return prototype.hasOwnProperty("isPrototypeOf") !== false;
 }
 function cloneDeep(val, instanceClone) {
-  switch (typeOf(val)) {
+  switch (typeOf(val) as string) {
     case "object":
       return cloneObjectDeep(val, instanceClone);
     case "array":
@@ -195,6 +199,13 @@ function cloneObjectDeep(val, instanceClone) {
     const res = new val.constructor();
     for (let key in val) {
       res[key] = cloneDeep(val[key], instanceClone);
+    }
+    if (typeof Object.getOwnPropertySymbols === "function") {
+      const symbols = Object.getOwnPropertySymbols(val);
+      for (let i = 0; i < symbols.length; i++) {
+        const sym = symbols[i];
+        res[sym] = cloneDeep(val[sym], instanceClone);
+      }
     }
     return res;
   }

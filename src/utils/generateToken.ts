@@ -1,4 +1,4 @@
-import TOKEN_LENGTH from "../const/TOKEN_LENGTH";
+import TOKEN_LENGTH from "../const/TOKEN_LENGTH.js";
 
 export default function generateToken() {
   const random = new Array(TOKEN_LENGTH);

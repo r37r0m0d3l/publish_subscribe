@@ -1,8 +1,7 @@
-version: "3.7"
 services:
   redis:
     container_name: "publish-subscribe-redis"
     image: "redis:latest"
-    restart: always
+    restart: no
     ports:
       - "6379:6379"

@@ -1,15 +1,21 @@
-const express = require("express");
-const app = require("express")();
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
-const fs = require("fs");
-const ExpressRateLimit = require("express-rate-limit");
-const limiter = new ExpressRateLimit({ max: 60, windowMs: 6e4 });
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import { readFileSync } from "fs";
+import rateLimit from "express-rate-limit";
+
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+
+const limiter = rateLimit({ max: 60, windowMs: 6e4 });
 app.use(limiter);
 app.use("/node_modules", express.static("node_modules"));
-http.listen(3000, function () {
+
+httpServer.listen(3_000, function () {
   console.log("listening on *:3000");
 });
+
 io.on("connect", function (socket) {
   socket.on("event_from_client", function (data) {
     socket.emit("event_from_server", { data: "Hello Client" });
@@ -21,9 +27,9 @@ io.on("connect", function (socket) {
 
 app.get("/", function (req, res) {
   res.setHeader("Content-Type", "text/html");
-  res.send(fs.readFileSync("./static/index.html"));
+  res.send(readFileSync("./static/index.html"));
 });
 app.get("/index.mjs", function (req, res) {
   res.setHeader("Content-Type", "text/javascript");
-  res.send(fs.readFileSync("./static/index.mjs"));
+  res.send(readFileSync("./static/index.mjs"));
 });
