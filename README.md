@@ -337,7 +337,7 @@ Yet another publish-subscribe library? Why this library exists:
 
     -   Possibility to use async callbacks in subscriptions.
 
-    -   Get subscription callback function by token and use it somewhere else.
+    -   Get a subscription callback function by token and use it somewhere else.
 
     -   Error swallowing. The publish-subscribe pattern should not break on some function somewhere deep in code.
 
@@ -345,7 +345,7 @@ Yet another publish-subscribe library? Why this library exists:
 
     -   Possibility to use finite numbers, strings or symbols as channel names.
 
-    -   Subscription functions receive callback token among channel names and published data.
+    -   Subscription functions receive a callback token among channel names and published data.
 
     -   Has *subscribeOnce* method.
 
@@ -363,12 +363,12 @@ The **worst** things that can happen to the publish-subscribe library that is **
 
 -   ☠️☠️☠️
 
-    -   You should have **multiple subscriptions** for one channel. Somehow it does not exists in other libraries.
+    -   You should have **multiple subscriptions** for one channel. Somehow it does not exist in other libraries.
 
     -   Event inheritance. This should be handled by subscription callbacks **not by** the publish-subscribe system.
 
     -   Hellish **wildcards-hierarchical addressing-messages matching** for each event.
-    First of all, this is impossible with numbers or symbols.
+    First, this is impossible with numbers or symbols.
     And this makes no sense as you can create the root channel name anyway.
     In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others.
     While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"`
@@ -381,11 +381,11 @@ The **worst** things that can happen to the publish-subscribe library that is **
     You should not save context in one place and take it hostage.
     Probably you should use global variables instead etc.
 
-    -   **Cancel publish** event distribution for subscribers. This behavior reserved for Observer pattern.
+    -   **Cancel publish** event distribution for subscribers. This behavior reserved for an Observer pattern.
 
 -   ☠️
 
-    -   No **order priority** for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
+    -   No **order priority** for subscriptions. Somehow a pattern should be about decoupling, but sometimes it has it in.
 
     -   **Sticky events** concept.
     Events will **stick** in and if any subscriber subscribes for such events after they were published,

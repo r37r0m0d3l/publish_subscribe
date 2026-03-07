@@ -19,15 +19,16 @@
     "node": ">=22.18.0",
     "npm": ">=8.12.0"
   },
+  "engineStrict": true,
   "exports": {
     ".": {
+      "import": "./dist/publish_subscribe.js",
       "browser": {
         "import": "./dist/publish_subscribe.js"
       },
       "node": {
         "import": "./dist/publish_subscribe.js"
       },
-      "import": "./dist/publish_subscribe.js",
       "default": "./dist/publish_subscribe.js"
     }
   },

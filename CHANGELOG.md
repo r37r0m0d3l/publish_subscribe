@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+* Update configuration files and improve documentation
+
 ## 2.0.0
 
 #### ⚠️ BREAKING CHANGES
