@@ -390,7 +390,6 @@ The **worst** things that can happen to the publish-subscribe library that is **
     -   **Sticky events** concept.
     Events will **stick** in and if any subscriber subscribes for such events after they were published,
     the subscribers will still receive them upon registration.
-    the subscribers will still receive them upon registration.
 
 The things you may not like:
 
@@ -401,9 +400,9 @@ The things you may not like:
 
 <!-- Badges -->
 
-[npm-downloads-img]: https://badgen.net/npm/dt/translit%2Ded?&icon=terminal&label=downloads&color=009688
-[npm-downloads-url]: https://npmjs.com/package/translit-ed
-[npm-version-img]: https://badgen.net/npm/v/translit-ed?&icon=npm&label=npm&color=DD3636
-[npm-version-url]: https://npmjs.com/package/translit-ed
-[ts-img]: https://badgen.net/npm/types/translit-ed?&icon=typescript&label=types&color=1E90FF
-[ts-url]: https://github.com/r37r0m0d3l/translit-ed/blob/master/dist/translit-ed.d.ts
+[npm-downloads-img]: https://badgen.net/npm/dt/@r37r0m0d3l/publish_subscribe?&icon=terminal&label=downloads&color=009688
+[npm-downloads-url]: https://npmjs.com/package/@r37r0m0d3l/publish_subscribe
+[npm-version-img]: https://badgen.net/npm/v/@r37r0m0d3l/publish_subscribe?&icon=npm&label=npm&color=DD3636
+[npm-version-url]: https://npmjs.com/package/@r37r0m0d3l/publish_subscribe
+[ts-img]: https://badgen.net/npm/types/@r37r0m0d3l/publish_subscribe?&icon=typescript&label=types&color=1E90FF
+[ts-url]: https://github.com/r37r0m0d3l/publish_subscribe/tree/master/dist/publish_subscribe.d.ts

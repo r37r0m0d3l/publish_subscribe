@@ -4,18 +4,7 @@ JavaScript's implementation of the Publish-Subscribe pattern.
 
 [![npm](https://badgen.net/npm/v/@r37r0m0d3l/publish_subscribe?&icon=npm&label=npm&color=DD3636&v=1.4.0)](https://www.npmjs.com/package/@r37r0m0d3l/publish_subscribe)
 [![downloads](https://badgen.net/npm/dt/@r37r0m0d3l/publish_subscribe?&icon=terminal&label=downloads&color=009688&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![stars](https://badgen.net/github/stars/r37r0m0d3l/publish_subscribe?&icon=github&label=stars&color=ffcc33&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
 [![types](https://badgen.net/npm/types/@r37r0m0d3l/publish_subscribe?&icon=typescript&label=types&color=1E90FF&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![build](https://badgen.net/travis/r37r0m0d3l/publish_subscribe?&icon=travis&label=build&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-[![lgtm](https://badgen.net/lgtm/grade/g/r37r0m0d3l/publish_subscribe?&icon=lgtm&label=lgtm:js/ts&color=00C853&v=1.4.0)](https://github.com/r37r0m0d3l/publish_subscribe)
-
----
-
-*If you use this project don't forget to give a
-⭐ [star](https://github.com/r37r0m0d3l/publish_subscribe) ⭐ to it on GitHub!*
-
----
-
 ## 🏃💨 Tl;dr
 
 ```typescript
@@ -63,24 +52,10 @@ Installation.
 npm install @r37r0m0d3l/publish_subscribe
 ```
 
-CommonJS.
-
-```js
-const { PublishSubscribe } = require("@r37r0m0d3l/publish_subscribe");
-```
-
 ECMAScript Modules.
 
 ```js
 import { PublishSubscribe } from "@r37r0m0d3l/publish_subscribe";
-```
-
-UNPKG CDN.
-
-```html
-<script src="
-https://unpkg.com/@r37r0m0d3l/publish_subscribe/dist/publish_subscribe.min.js
-"></script>
 ```
 
 ## ⌨ Creating Instance
@@ -441,7 +416,7 @@ Yet another publish-subscribe library? Why this library exists:
 
     -   Possibility to use async callbacks in subscriptions.
 
-    -   Get subscription callback function by token and use it somewhere else.
+    -   Get a subscription callback function by token and use it somewhere else.
 
     -   Error swallowing. The publish-subscribe pattern should not break on some function somewhere deep in code.
 
@@ -449,7 +424,7 @@ Yet another publish-subscribe library? Why this library exists:
 
     -   Possibility to use finite numbers, strings or symbols as channel names.
 
-    -   Subscription functions receive callback token among channel names and published data.
+    -   Subscription functions receive a callback token among channel names and published data.
 
     -   Has *subscribeOnce* method.
 
@@ -472,7 +447,7 @@ The **worst** things that can happen to the publish-subscribe library that is **
     -   Event inheritance. This should be handled by subscription callbacks **not by** the publish-subscribe system.
 
     -   Hellish **wildcards-hierarchical addressing-messages matching** for each event.
-    First of all, this is impossible with numbers or symbols.
+    First, this is impossible with numbers or symbols.
     And this makes no sense as you can create the root channel name anyway.
     In example when you publish `"app:user:registered"` and `"app:user:login"`, just publish `"app:user"` among others.
     While when you publish `"app:user:re-login"`, do not publish `"app:user"` and `"re-login"`
@@ -485,11 +460,11 @@ The **worst** things that can happen to the publish-subscribe library that is **
     You should not save context in one place and take it hostage.
     Probably you should use global variables instead etc.
 
-    -   **Cancel publish** event distribution for subscribers. This behavior reserved for Observer pattern.
+    -   **Cancel publish** event distribution for subscribers. This behavior reserved for an Observer pattern.
 
 -   ☠️
 
-    -   No **order priority** for subscriptions. Somehow pattern should be about decoupling, but sometimes it has it in.
+    -   No **order priority** for subscriptions. Somehow a pattern should be about decoupling, but sometimes it has it in.
 
     -   **Sticky events** concept.
     Events will **stick** in and if any subscriber subscribes for such events after they were published,
@@ -501,9 +476,3 @@ The things you may not like:
 
     -   No ECMAScript 3 / ECMAScript 5 / Internet Explorer 6 compatibility.
     You can transpile the library to the CommonJS module via Babel with the configuration you need.
-
-## 👀 Discover more
-
-[My other projects](https://r37r0m0d3l.icu/open_source_map)
-
-<img src="https://raw.githubusercontent.com/r37r0m0d3l/r37r0m0d3l/master/osmap.svg?sanitize=true" width="960" height="520" style="display:block;height:auto;margin-left:auto;margin-right:auto;min-height:520px;min-width:960px;width:100%;">
